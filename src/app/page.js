@@ -1,37 +1,32 @@
-import { Box, Typography, Button, Card, CardContent } from "@mui/material";
+"use client";
 
-export default function Home() {
+import { Box } from "@mui/material";
+import Home from "./component/Home";
+import InfoSection from "./component/InfoSection";
+import AboutMe from "./component/AboutMe";
+import Skills from "./component/Skills";
+import Contact from "./component/Contact";
+import Footer from "./component/Footer";
+import Portfolio from "./component/Portfolio";
+
+export default function Page() {
   return (
-    <Box sx={{ p: 4, maxWidth: 800, mx: "auto" }}>
-      <Typography variant="h2" gutterBottom>
-        Welcome to My Portfolio
-      </Typography>
-      <Typography variant="body1" paragraph>
-        Hi, I’m [Your Name]. I’m a freelancer showcasing my work below!
-      </Typography>
-
-      <Box sx={{ mt: 4 }}>
-        <Card sx={{ mb: 2 }}>
-          <CardContent>
-            <Typography variant="h5">Project 1</Typography>
-            <Typography variant="body2">
-              Description of your first project goes here.
-            </Typography>
-          </CardContent>
-        </Card>
-        <Card sx={{ mb: 2 }}>
-          <CardContent>
-            <Typography variant="h5">Project 2</Typography>
-            <Typography variant="body2">
-              Description of your second project goes here.
-            </Typography>
-          </CardContent>
-        </Card>
+    <Box>
+      <Home />
+      <InfoSection />
+      <Box id="about-me">
+        <AboutMe />
       </Box>
-
-      <Button variant="contained" href="/blog" sx={{ mt: 2 }}>
-        Go to Blog
-      </Button>
+      <Box id="skills">
+        <Skills />
+      </Box>
+      <Box id="portfolio">
+        <Portfolio />
+      </Box>
+      <Box id="contact">
+        <Contact />
+      </Box>
+      <Footer />
     </Box>
   );
 }
