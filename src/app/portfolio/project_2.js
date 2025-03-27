@@ -5,14 +5,24 @@ import rehypeRaw from "rehype-raw";
 const markdownContent = `
 # Perfect Shapes – A Cross-Platform Drawing Challenge
 
+<br />
+
 ![Perfect Shapes Screenshot](/projects/project_2.png)
+
+<br />
 
 ## Introduction
 
+<br />
+
 ### Perfect Shapes – A Cross-Platform Drawing Challenge
+
+<br />
 
 **Project Overview:**  
 Perfect Shapes is a mobile app I developed for iOS and Android using Flutter, designed to combine precision and creativity in a drawing challenge. The app features both single-player and offline multiplayer modes, allowing users to practice their drawing skills solo or take turns competing with friends on the same device.
+
+<br />
 
 **Development Highlights:**
 
@@ -21,18 +31,27 @@ Perfect Shapes is a mobile app I developed for iOS and Android using Flutter, de
 - **Offline Multiplayer:** Designed an offline multiplayer feature that supports up to 10 players on the same device, allowing users to take turns in a drawing competition without the need for network connectivity.
 - **Focus on UI/UX:** Prioritized a clean, intuitive design to provide a smooth user experience, combining functionality with an appealing visual style.
 
+<br />
+
 **Technical Stack:**
 
 - **Framework:** Flutter  
 - **Languages:** Dart  
 - **Platforms:** iOS and Android
 
+<br />
+
 **Learning and Growth:**  
 Developing Perfect Shapes enabled me to expand my expertise in Flutter, particularly in managing app state, animations, and optimizing performance for cross-platform functionality. The project also challenged me to design a user-friendly interface and integrate offline multiplayer capabilities, reflecting my focus on both technical precision and creative user engagement.
 
 Perfect Shapes showcases my ability to develop innovative applications that blend technical skills with a strong emphasis on user experience. I continue to refine the app with updates and new features, underscoring my commitment to growth and excellence in software engineering.
 
+<br />
+
 **Game Video:**  
+
+<br />
+
 <div style="text-align: center">
   <iframe 
     src="https://drive.google.com/file/d/1-P1Ht1JEz3LxkiGvH0GLtf2t5VleLGfF/preview" 
@@ -43,12 +62,20 @@ Perfect Shapes showcases my ability to develop innovative applications that blen
   </iframe>
 </div>
 
+<br />
+
 **App Link:**  
 [iOS](https://apps.apple.com/us/app/perfect-shapes-game/id6569262195) | [Android](https://play.google.com/store/apps/details?id=com.chappmaster.shape_accuracy)
 
+<br />
+
 ---
 
+<br />
+
 ## Implementation
+
+<br />
 
 - **Project Setup and Framework Selection:**
     - **Framework:** Chose Flutter for its cross-platform capabilities, allowing a single codebase for both iOS and Android, which reduced development time and ensured consistent functionality across platforms.
@@ -78,9 +105,15 @@ Perfect Shapes showcases my ability to develop innovative applications that blen
     - **Platforms:** Deployed to both Apple App Store and Google Play Store, managing platform-specific requirements like app icons, permissions, and performance benchmarks.
     - **Continuous Improvement:** Regularly updated the app with new features and enhancements based on user feedback, manually iterating on the design and functionality to keep the app engaging and up-to-date.
 
+<br />
+
 ---
 
+<br />
+
 ## Troubleshooting
+
+<br />
 
 The development process was relatively swift, aided significantly by using GPT for coding assistance. However, the main challenge arose during the deployment phase, particularly in finding enough testers for the Android version. To address this, I needed around 20 testers, which took some time to arrange. I successfully overcame this hurdle by reaching out to communities on Reddit, where I was able to gather the necessary testers to refine and finalize the app.
 `;
@@ -91,7 +124,8 @@ export default function Project2() {
       style={{
         fontFamily: "Poppins, sans-serif",
         padding: "10px",
-        fontSize: "14px",
+        fontSize: "16px",
+        lineHeight: "2",
       }}
     >
       <ReactMarkdown
@@ -108,6 +142,32 @@ export default function Project2() {
                 display: "block",
               }}
               alt={props.alt}
+            />
+          ),
+          ul: ({ node, ...props }) => (
+            <ul
+              style={{
+                paddingLeft: "1.5rem", 
+                marginBottom: "1rem",
+              }}
+              {...props}
+            />
+          ),
+          ol: ({ node, ...props }) => (
+            <ol
+              style={{
+                paddingLeft: "1.5rem",
+                marginBottom: "1rem",
+              }}
+              {...props}
+            />
+          ),
+          li: ({ node, ...props }) => (
+            <li
+              style={{
+                marginBottom: "0.5rem", 
+              }}
+              {...props}
             />
           ),
         }}

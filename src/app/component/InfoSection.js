@@ -40,7 +40,7 @@ export default function InfoSection() {
         </Typography>
 
         <Typography
-          variant="body2"
+          variant="body1"
           sx={{
             mb: 2,
             fontFamily: "Poppins, sans-serif",

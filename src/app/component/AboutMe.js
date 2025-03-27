@@ -79,105 +79,86 @@ export default function AboutMe() {
         container
         spacing={4}
         justifyContent="center"
-        sx={{ maxWidth: "900px" }}
+        sx={{ maxWidth: "60%" }}
       >
-        {/* First Row: Icons */}
-        <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center" }}>
-          <SmartToyIcon sx={{ fontSize: 50, color: "#b3b3b3" }} />
-        </Grid2>
-        <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center" }}>
-          <CodeIcon sx={{ fontSize: 50, color: "#b3b3b3" }} />
-        </Grid2>
-        <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center" }}>
-          <PhoneIphoneIcon sx={{ fontSize: 50, color: "#b3b3b3" }} />
-        </Grid2>
-
-        {/* Second Row: Titles */}
-        <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center", mt: 1 }}>
-          <Typography
-            variant="h6"
+        {[
+          {
+            icon: <SmartToyIcon sx={{ fontSize: 50, color: "#b3b3b3" }} />,
+            title: "AI & RESEARCH",
+            description: (
+              <>
+                I specialize in <strong>AI, Deep Learning, and NLP</strong>. My
+                expertise includes{" "}
+                <strong>computer vision, data science and NLP</strong>,
+                delivering real-world AI solutions with high-impact
+                applications.
+              </>
+            ),
+          },
+          {
+            icon: <CodeIcon sx={{ fontSize: 50, color: "#b3b3b3" }} />,
+            title: "FULL-STACK DEVELOPMENT",
+            description: (
+              <>
+                I build <strong>scalable web applications</strong> using
+                <strong> React, Next.js, Flask, and FastAPI</strong>. I ensure
+                high-performance, responsive, and user-friendly digital
+                experiences with optimized backend and front-end solutions.
+              </>
+            ),
+          },
+          {
+            icon: <PhoneIphoneIcon sx={{ fontSize: 50, color: "#b3b3b3" }} />,
+            title: "MOBILE APP DEVELOPMENT",
+            description: (
+              <>
+                I develop <strong>cross-platform mobile applications</strong>{" "}
+                for
+                <strong> iOS & Android</strong> using Flutter. My experience
+                includes
+                <strong>
+                  {" "}
+                  UI/UX design, API integration, performance optimization,
+                </strong>{" "}
+                and <strong>publishing apps</strong> on the App Store and Google
+                Play.
+              </>
+            ),
+          },
+        ].map((item, idx) => (
+          <Grid2
+            key={idx}
+            xs={12}
+            md={4}
             sx={{
-              fontWeight: "bold",
-              fontFamily: 'Poppins, sans-serif',
+              textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 2,
             }}
           >
-            AI & RESEARCH
-          </Typography>
-        </Grid2>
-        <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center", mt: 1 }}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: "bold",
-              fontFamily: 'Poppins, sans-serif',
-            }}
-          >
-            FULL-STACK DEVELOPMENT
-          </Typography>
-        </Grid2>
-        <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center", mt: 1 }}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: "bold",
-              fontFamily: 'Poppins, sans-serif',
-            }}
-          >
-            MOBILE APP DEVELOPMENT
-          </Typography>
-        </Grid2>
-
-        {/* Third Row: Descriptions */}
-        <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center" }}>
-          <Typography
-            variant="body1"
-            sx={{
-              fontFamily: 'Poppins, sans-serif',
-              maxWidth: "280px",
-              margin: "auto",
-            }}
-          >
-            I specialize in <strong>AI, Deep Learning, and NLP</strong>. My
-            expertise includes{" "}
-            <strong>computer vision, data science and NLP</strong>, delivering
-            real-world AI solutions with high-impact applications.
-          </Typography>
-        </Grid2>
-        <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center" }}>
-          <Typography
-            variant="body1"
-            sx={{
-              fontFamily: 'Poppins, sans-serif',
-              maxWidth: "280px",
-              margin: "auto",
-            }}
-          >
-            I build <strong>scalable web applications</strong> using
-            <strong> React, Next.js, Flask, and FastAPI</strong>. I ensure
-            high-performance, responsive, and user-friendly digital experiences
-            with optimized backend and front-end solutions.
-          </Typography>
-        </Grid2>
-        <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center" }}>
-          <Typography
-            variant="body1"
-            sx={{
-              fontFamily: 'Poppins, sans-serif',
-              maxWidth: "280px",
-              margin: "auto",
-            }}
-          >
-            I develop <strong>cross-platform mobile applications</strong> for
-            <strong> iOS & Android</strong> using Flutter. My experience
-            includes
-            <strong>
-              {" "}
-              UI/UX design, API integration, performance optimization,
-            </strong>
-            and <strong>publishing apps</strong> on the App Store and Google
-            Play.
-          </Typography>
-        </Grid2>
+            {item.icon}
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                fontFamily: "Poppins, sans-serif",
+              }}
+            >
+              {item.title}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontFamily: "Poppins, sans-serif",
+                maxWidth: "280px",
+              }}
+            >
+              {item.description}
+            </Typography>
+          </Grid2>
+        ))}
       </Grid2>
 
       <Box

@@ -5,9 +5,15 @@ import rehypeRaw from "rehype-raw";
 const markdownContent = `
 # TranscribeTube – AI-Powered Subtitle Generator
 
+<br />
+
 ![TranscribeTube Screenshot](/projects/project_3.png)
 
+<br />
+
 ## Introduction
+
+<br />
 
 ### TranscribeTube
 
@@ -15,9 +21,15 @@ TranscribeTube is a Python-based tool I developed to simplify the transcription 
 
 As someone learning new languages, I use TranscribeTube to transcribe and create subtitles for videos, enhancing my understanding of spoken content in my target languages. The tool features an intuitive Gradio web interface, allowing me to easily upload videos, select transcription languages, and download subtitles in SRT format, making it a valuable resource for my language learning journey.
 
+<br />
+
 ## 🎬 Demo
 
+<br />
+
 This GIF demonstrates how easy it is to use TranscribeTube to transcribe and generate subtitles for videos.
+
+<br />
 
 <div style="text-align: center">
   <img 
@@ -27,11 +39,17 @@ This GIF demonstrates how easy it is to use TranscribeTube to transcribe and gen
   />
 </div>
 
+<br />
+
 ---
+
+<br />
 
 ## Implementation
 
 TranscribeTube utilizes a combination of powerful technologies to provide a seamless transcription experience:
+
+<br />
 
 - **Interactive Interface with Gradio**:  
   The tool employs Gradio to offer a user-friendly web interface, allowing users to upload local video files or input YouTube links directly for transcription.
@@ -44,9 +62,15 @@ TranscribeTube utilizes a combination of powerful technologies to provide a seam
 
 To get started with TranscribeTube, users can clone the repository, install dependencies, and configure their Hugging Face API tokens in the \`config.yaml\` file. The main transcription script can be run to launch the Gradio interface, where users can upload videos, select languages, and manage their transcriptions.
 
+<br />
+
 ---
 
+<br />
+
 ## Troubleshooting
+
+<br />
 
 - **Real-Time Progress Hook with Gradio**:  
   Integrating real-time progress updates into the Gradio interface was challenging, especially when connecting the speaker diarization process to the Gradio progress bar. To solve this, I created a custom hook class that links the diarization model's progress with Gradio, allowing the interface to display updates in real time. This required a deep understanding of the model's processing flow and careful implementation to synchronize the progress accurately with the Gradio interface.
@@ -61,7 +85,8 @@ export default function Project3() {
       style={{
         fontFamily: "Poppins, sans-serif",
         padding: "10px",
-        fontSize: "14px",
+        fontSize: "16px",
+        lineHeight: "2",
       }}
     >
       <ReactMarkdown
@@ -72,12 +97,38 @@ export default function Project3() {
               {...props}
               style={{
                 width: "100%",
-                maxWidth: "800px",
+                maxWidth: "400px",
                 borderRadius: "10px",
                 margin: "10px auto",
                 display: "block",
               }}
               alt={props.alt}
+            />
+          ),
+          ul: ({ node, ...props }) => (
+            <ul
+              style={{
+                paddingLeft: "1.5rem", 
+                marginBottom: "1rem",
+              }}
+              {...props}
+            />
+          ),
+          ol: ({ node, ...props }) => (
+            <ol
+              style={{
+                paddingLeft: "1.5rem",
+                marginBottom: "1rem",
+              }}
+              {...props}
+            />
+          ),
+          li: ({ node, ...props }) => (
+            <li
+              style={{
+                marginBottom: "0.5rem", 
+              }}
+              {...props}
             />
           ),
         }}

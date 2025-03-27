@@ -3,8 +3,13 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 
-
 export default function Home() {
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -12,6 +17,7 @@ export default function Home() {
         sx={{
           flexGrow: 1,
           display: "flex",
+          flexDirection: { xs: "column", md: "row" },
           height: "100vh",
           position: "relative",
           overflow: "hidden",
@@ -25,35 +31,46 @@ export default function Home() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "flex-start",
-            padding: "5%",
+            padding: { xs: "20px", sm: "40px", md: "5%" },
             backgroundColor: "#ffffff",
-            clipPath: "polygon(0 0, 100% 0, 75% 100%, 0 100%)",
+            clipPath: {
+              xs: "none",
+              md: "polygon(0 0, 100% 0, 75% 100%, 0 100%)",
+            },
           }}
         >
           <Typography
-            variant="h6"
+            variant="h5"
             sx={{
               color: "black",
               mb: 1,
               fontFamily: "Poppins, sans-serif",
               fontWeight: "bold",
+              fontSize: { xs: "18px", md: "24px" },
             }}
           >
             Hi, I am
           </Typography>
+
           <Typography
-            variant="h2"
             sx={{
               fontWeight: "bold",
               color: "black",
               fontFamily: "Poppins, sans-serif",
+              fontSize: { xs: "32px", sm: "42px", md: "60px" },
             }}
           >
             Hanwool Park
           </Typography>
+
           <Typography
-            variant="subtitle1"
-            sx={{ color: "gray", mt: 1, fontFamily: "Poppins, sans-serif" }}
+            variant="body1"
+            sx={{
+              color: "gray",
+              mt: 1,
+              fontFamily: "Poppins, sans-serif",
+              fontSize: { xs: "12px", sm: "14px", md: "16px" },
+            }}
           >
             Machine Learning Engineer / Full Stack Developer
           </Typography>
@@ -74,7 +91,6 @@ export default function Home() {
             >
               <GitHubIcon />
             </IconButton>
-
             <IconButton
               sx={{ backgroundColor: "white", color: "black" }}
               href="https://www.linkedin.com/in/hanwool-park/"
@@ -95,83 +111,90 @@ export default function Home() {
             justifyContent: "space-between",
             backgroundColor: "#0d0d0d",
             height: "100vh",
-            clipPath: "polygon(25% 0, 100% 0, 100% 100%, 0% 100%)",
-            padding: "3%",
+            clipPath: {
+              xs: "none",
+              md: "polygon(25% 0, 100% 0, 100% 100%, 0% 100%)",
+            },
+            padding: { xs: "20px", md: "3%" },
           }}
         >
-          {/* Header Navigation Buttons */}
+          {/* Navigation Buttons */}
           <Box
             sx={{
               width: "100%",
               display: "flex",
               justifyContent: "flex-end",
-              gap: 2,
+              gap: 1.5,
+              flexWrap: "wrap",
             }}
           >
-            <a href="#about-me" style={{ textDecoration: "none" }}>
-              <Button
-                sx={{
-                  color: "white",
-                  textTransform: "none",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "15px",
-                }}
-              >
-                About me
-              </Button>
-            </a>
-            <a href="#skills" style={{ textDecoration: "none" }}>
-              <Button
-                sx={{
-                  color: "white",
-                  textTransform: "none",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "15px",
-                }}
-              >
-                Skills
-              </Button>
-            </a>
-            <a href="#portfolio" style={{ textDecoration: "none" }}>
-              <Button
-                sx={{
-                  color: "white",
-                  textTransform: "none",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "15px",
-                }}
-              >
-                Portfolio
-              </Button>
-            </a>
-            <a href="#contact" style={{ textDecoration: "none" }}>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "white",
-                  color: "black",
-                  borderRadius: "20px",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "15px",
-                }}
-              >
-                CONTACT ME
-              </Button>
-            </a>
+            <Button
+              sx={{
+                color: "white",
+                textTransform: "none",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: { xs: "12px", sm: "14px", md: "18px" },
+              }}
+              onClick={() => scrollToSection("about-me")}
+            >
+              About me
+            </Button>
+            <Button
+              sx={{
+                color: "white",
+                textTransform: "none",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: { xs: "12px", sm: "14px", md: "18px" },
+              }}
+              onClick={() => scrollToSection("skills")}
+            >
+              Skills
+            </Button>
+            <Button
+              sx={{
+                color: "white",
+                textTransform: "none",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: { xs: "12px", sm: "14px", md: "18px" },
+              }}
+              onClick={() => scrollToSection("portfolio")}
+            >
+              Portfolio
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "white",
+                color: "black",
+                borderRadius: "20px",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: { xs: "12px", sm: "14px", md: "18px" },
+              }}
+              onClick={() => scrollToSection("contact")}
+            >
+              CONTACT ME
+            </Button>
           </Box>
 
-          {/* Profile Image (Centered) */}
+          {/* Profile Image */}
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              width: "100%",
+              mt: { xs: 4, md: 0 },
             }}
           >
             <img
               src="/profile.png"
               alt="Profile Image"
-              style={{ maxWidth: "800px", borderRadius: "10px" }}
+              style={{
+                width: "100%",
+                maxWidth: "700px",
+                height: "auto",
+                borderRadius: "10px",
+              }}
             />
           </Box>
         </Box>

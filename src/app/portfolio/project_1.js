@@ -6,15 +6,23 @@ const markdownContent = `
 # Interpreter App
 
 ![Interpreter Screenshot](/projects/project_1.png)
+<br />
 
 ## Introduction
 
+<br />
+
 ### Interpreter – Your Live Translation Companion
+
+<br />
 
 **Project Overview:**  
 Interpreter is a live translation app developed using Flutter, designed to bridge language barriers by supporting all languages through GPT-4. The app aims to help people communicate seamlessly across different languages, offering both text and voice recognition features. Translations are provided in real-time, displayed on-screen and spoken aloud, making it ideal for dynamic conversational use.
 
+<br />
+
 **Key Features:**
+
 
 - **Multilingual Support:** Powered by GPT-4, Interpreter supports all major languages, facilitating effective communication across language boundaries.
 - **Text and Voice Input:** Users can enter text manually or use voice recognition, providing flexibility in various interaction scenarios.
@@ -22,15 +30,23 @@ Interpreter is a live translation app developed using Flutter, designed to bridg
 - **User-Friendly Interface:** Designed with a simple and intuitive UI for ease of use, making the app accessible to all users.
 - **API Integration:** Uses OpenAI’s API for accurate and efficient language processing, leveraging state-of-the-art AI technology.
 
+<br />
+
 **Development Highlights:**
 
 - **Cross-Platform Development:** Built with Flutter to ensure compatibility and consistent performance on both Android and iOS platforms.
 - **Voice and Text Processing:** Integrated advanced voice recognition and text processing capabilities to deliver real-time, accurate translations during live interactions.
 
+<br />
+
 **Purpose and Impact:**  
 Interpreter is designed to make communication across different languages more accessible and straightforward, helping individuals understand and connect effortlessly. Whether for travel, work, or everyday conversations, Interpreter provides a practical solution for breaking down language barriers.
 
+<br />
+
 ## App Video
+
+<br />
 
 <div style="text-align: center">
   <iframe 
@@ -42,12 +58,20 @@ Interpreter is designed to make communication across different languages more ac
   </iframe>
 </div>
 
+<br />
+
 ---
+
+<br />
 
 ## Implementation
 
+<br />
+
 **Integration with OpenAI Models:**  
 Interpreter utilizes a combination of OpenAI models to achieve seamless speech-to-speech translation, overcoming the lack of a fully integrated solution by chaining specific models for each task:
+
+<br />
 
 1. **Speech Recognition with Whisper-1:**  
    I used OpenAI’s Whisper-1 model for speech recognition, which accurately transcribes spoken input into text. This model provides high accuracy in capturing spoken language, making it ideal for the initial step in the translation pipeline.
@@ -66,10 +90,16 @@ To ensure a smooth and responsive user experience, I focused on optimizing the e
 **Cross-Platform Development:**  
 Built with Flutter, the app is designed to function consistently across both Android and iOS platforms. The implementation was thoroughly tested on a variety of devices and simulators using Android Studio and Xcode to ensure optimal performance and responsiveness.
 
+<br />
+
 **Outcome:**  
 By integrating Whisper-1 for speech recognition, GPT-4 for translation, and TTS-1 for speech synthesis, Interpreter effectively delivers a comprehensive speech-to-speech translation experience. This implementation demonstrates my ability to creatively utilize and optimize multiple OpenAI models, providing a practical solution that addresses language barriers with advanced AI capabilities.
 
+<br />
+
 ---
+
+<br />
 
 ## Troubleshooting
 
@@ -84,7 +114,8 @@ export default function Project1() {
       style={{
         fontFamily: "Poppins, sans-serif",
         padding: "10px",
-        fontSize: "14px",
+        fontSize: "16px",
+        lineHeight: "2",
       }}
     >
       <ReactMarkdown
@@ -101,6 +132,32 @@ export default function Project1() {
                 display: "block",
               }}
               alt={props.alt}
+            />
+          ),
+          ul: ({ node, ...props }) => (
+            <ul
+              style={{
+                paddingLeft: "1.5rem", 
+                marginBottom: "1rem",
+              }}
+              {...props}
+            />
+          ),
+          ol: ({ node, ...props }) => (
+            <ol
+              style={{
+                paddingLeft: "1.5rem",
+                marginBottom: "1rem",
+              }}
+              {...props}
+            />
+          ),
+          li: ({ node, ...props }) => (
+            <li
+              style={{
+                marginBottom: "0.5rem", 
+              }}
+              {...props}
             />
           ),
         }}

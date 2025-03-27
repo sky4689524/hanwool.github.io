@@ -8,12 +8,21 @@ export default function BackToTop() {
   // Show button when user scrolls down
   useEffect(() => {
     const toggleVisibility = () => {
-      setVisible(window.scrollY > 300);
+      if (window.scrollY > 300) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
     };
 
     window.addEventListener("scroll", toggleVisibility);
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
+
+  // Function to scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <Box
@@ -25,19 +34,18 @@ export default function BackToTop() {
         display: visible ? "block" : "none",
       }}
     >
-      <a href="#home" style={{ textDecoration: "none" }}>
-        <Fab
-          color="primary"
-          size="medium"
-          sx={{
-            backgroundColor: "white",
-            color: "black",
-            "&:hover": { backgroundColor: "#f0f0f0" },
-          }}
-        >
-          <ArrowUpwardIcon />
-        </Fab>
-      </a>
+      <Fab
+        color="primary"
+        size="medium"
+        onClick={scrollToTop}
+        sx={{
+          backgroundColor: "white",
+          color: "black",
+          "&:hover": { backgroundColor: "#f0f0f0" },
+        }}
+      >
+        <ArrowUpwardIcon />
+      </Fab>
     </Box>
   );
 }

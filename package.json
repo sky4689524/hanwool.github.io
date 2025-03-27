@@ -7,7 +7,7 @@
     "build": "next build",
     "export": "next export",
     "postexport": "shx touch out/.nojekyll",
-    "deploy": "next build && npm run postexport && gh-pages -d out"
+    "deploy": "next build && npm run postexport && gh-pages -d out --nojekyll --cname https://sky4689524.github.io"
   },
   "homepage": "https://sky4689524.github.io",
   "dependencies": {
