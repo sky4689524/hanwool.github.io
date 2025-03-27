@@ -123,9 +123,10 @@ export default function Home() {
             sx={{
               width: "100%",
               display: "flex",
-              justifyContent: "flex-end",
-              gap: 1.5,
+              justifyContent: { xs: "center", md: "flex-end" },
+              gap: { xs: 1, sm: 1.5, md: 2 },
               flexWrap: "wrap",
+              mt: { xs: 2, md: 0 },
             }}
           >
             <Button
@@ -133,7 +134,9 @@ export default function Home() {
                 color: "white",
                 textTransform: "none",
                 fontFamily: "Poppins, sans-serif",
-                fontSize: { xs: "12px", sm: "14px", md: "18px" },
+                fontSize: { xs: "10px", sm: "12px", md: "18px" },
+                paddingX: { xs: "6px", sm: "10px", md: "16px" },
+                paddingY: { xs: "4px", sm: "6px", md: "8px" },
               }}
               onClick={() => scrollToSection("about-me")}
             >
@@ -144,7 +147,9 @@ export default function Home() {
                 color: "white",
                 textTransform: "none",
                 fontFamily: "Poppins, sans-serif",
-                fontSize: { xs: "12px", sm: "14px", md: "18px" },
+                fontSize: { xs: "10px", sm: "12px", md: "18px" },
+                paddingX: { xs: "6px", sm: "10px", md: "16px" },
+                paddingY: { xs: "4px", sm: "6px", md: "8px" },
               }}
               onClick={() => scrollToSection("skills")}
             >
@@ -155,7 +160,9 @@ export default function Home() {
                 color: "white",
                 textTransform: "none",
                 fontFamily: "Poppins, sans-serif",
-                fontSize: { xs: "12px", sm: "14px", md: "18px" },
+                fontSize: { xs: "10px", sm: "12px", md: "18px" },
+                paddingX: { xs: "6px", sm: "10px", md: "16px" },
+                paddingY: { xs: "4px", sm: "6px", md: "8px" },
               }}
               onClick={() => scrollToSection("portfolio")}
             >
@@ -168,7 +175,9 @@ export default function Home() {
                 color: "black",
                 borderRadius: "20px",
                 fontFamily: "Poppins, sans-serif",
-                fontSize: { xs: "12px", sm: "14px", md: "18px" },
+                fontSize: { xs: "10px", sm: "12px", md: "18px" },
+                paddingX: { xs: "6px", sm: "10px", md: "16px" },
+                paddingY: { xs: "4px", sm: "6px", md: "8px" },
               }}
               onClick={() => scrollToSection("contact")}
             >

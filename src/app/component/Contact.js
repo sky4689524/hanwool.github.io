@@ -12,6 +12,7 @@ export default function Contact() {
         justifyContent: "center",
         textAlign: "center",
         padding: "60px 20px",
+        color : "black"
       }}
     >
       {/* Title Section */}
