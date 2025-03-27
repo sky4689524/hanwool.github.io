@@ -3,7 +3,6 @@ import XIcon from "@mui/icons-material/X";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import EmailIcon from "@mui/icons-material/Email";
-import poppins from "../utils/poppinsFont";
 
 export default function Footer() {
   return (
@@ -76,7 +75,7 @@ export default function Footer() {
       {/* Copyright Info */}
       <Typography
         variant="body2"
-        sx={{ opacity: 0.8, fontFamily: poppins.style.fontFamily }}
+        sx={{ opacity: 0.8, fontFamily: "Poppins, sans-serif" }}
       >
         ©2025 <b>Hanwool Park</b> All Rights Reserved.
       </Typography>

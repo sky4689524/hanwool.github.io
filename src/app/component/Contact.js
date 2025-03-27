@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import poppins from "../utils/poppinsFont";
 
 export default function Contact() {
   return (
@@ -29,7 +28,7 @@ export default function Contact() {
           variant="h4"
           sx={{
             fontWeight: "bold",
-            fontFamily: poppins.style.fontFamily,
+            fontFamily: 'Poppins, sans-serif',
           }}
         >
           CONTACT
@@ -42,7 +41,7 @@ export default function Contact() {
         sx={{
           maxWidth: "60%",
           mb: 3,
-          fontFamily: poppins.style.fontFamily,
+          fontFamily: 'Poppins, sans-serif',
         }}
       >
         I’m open to <strong>collaborations, freelance projects,</strong> and

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Typography, Box, Button } from "@mui/material";
-import poppins from "../utils/poppinsFont";
 
 export default function InfoSection() {
   const [expanded, setExpanded] = useState(false);
@@ -31,7 +30,7 @@ export default function InfoSection() {
           sx={{
             fontWeight: "bold",
             mb: 2,
-            fontFamily: poppins.style.fontFamily,
+            fontFamily: "Poppins, sans-serif",
             textTransform: "uppercase",
             letterSpacing: "2px",
             lineHeight: 1.4,
@@ -44,7 +43,7 @@ export default function InfoSection() {
           variant="body2"
           sx={{
             mb: 2,
-            fontFamily: poppins.style.fontFamily,
+            fontFamily: "Poppins, sans-serif",
             fontWeight: 100,
           }}
         >
@@ -62,7 +61,7 @@ export default function InfoSection() {
             borderBottom: "2px solid white",
             width: "fit-content",
             paddingBottom: "5px",
-            fontFamily: poppins.style.fontFamily,
+            fontFamily: "Poppins, sans-serif",
           }}
         >
           {expanded ? "Show Less" : "Read More"}

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import {
   Box,
@@ -69,6 +71,7 @@ export default function Sidebar() {
                       color: "white",
                       fontSize: "20px",
                       fontWeight: "bold",
+                      fontFamily: "Poppins, sans-serif",
                     }}
                   >
                     Home
@@ -94,6 +97,7 @@ export default function Sidebar() {
                       color: "white",
                       fontSize: "20px",
                       fontWeight: "bold",
+                      fontFamily: "Poppins, sans-serif",
                     }}
                   >
                     Blog

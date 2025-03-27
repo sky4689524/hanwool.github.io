@@ -11,8 +11,8 @@ import Portfolio from "./component/Portfolio";
 
 export default function Page() {
   return (
-    <Box>
-      <Home />
+    <Box id="home">
+      <Home  />
       <InfoSection />
       <Box id="about-me">
         <AboutMe />

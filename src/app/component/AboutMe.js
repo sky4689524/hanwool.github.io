@@ -2,7 +2,6 @@ import { Box, Typography, Grid2 } from "@mui/material";
 import CodeIcon from "@mui/icons-material/Code"; // Development Icon
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone"; // Flutter App Icon
 import SmartToyIcon from "@mui/icons-material/SmartToy"; // AI & Research Icon
-import poppins from "../utils/poppinsFont";
 
 export default function AboutMe() {
   return (
@@ -30,7 +29,7 @@ export default function AboutMe() {
       >
         <Typography
           variant="h4"
-          sx={{ fontWeight: "bold", fontFamily: poppins.style.fontFamily }}
+          sx={{ fontWeight: "bold", fontFamily: "Poppins, sans-serif" }}
         >
           ABOUT ME
         </Typography>
@@ -43,7 +42,7 @@ export default function AboutMe() {
           textAlign: "center",
           maxWidth: "40%",
           mb: 3,
-          fontFamily: poppins.style.fontFamily,
+          fontFamily: "Poppins, sans-serif",
         }}
       >
         I am a <strong>Machine Learning Engineer & Full-Stack Developer</strong>{" "}
@@ -99,7 +98,7 @@ export default function AboutMe() {
             variant="h6"
             sx={{
               fontWeight: "bold",
-              fontFamily: poppins.style.fontFamily,
+              fontFamily: 'Poppins, sans-serif',
             }}
           >
             AI & RESEARCH
@@ -110,7 +109,7 @@ export default function AboutMe() {
             variant="h6"
             sx={{
               fontWeight: "bold",
-              fontFamily: poppins.style.fontFamily,
+              fontFamily: 'Poppins, sans-serif',
             }}
           >
             FULL-STACK DEVELOPMENT
@@ -121,7 +120,7 @@ export default function AboutMe() {
             variant="h6"
             sx={{
               fontWeight: "bold",
-              fontFamily: poppins.style.fontFamily,
+              fontFamily: 'Poppins, sans-serif',
             }}
           >
             MOBILE APP DEVELOPMENT
@@ -131,9 +130,9 @@ export default function AboutMe() {
         {/* Third Row: Descriptions */}
         <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center" }}>
           <Typography
-            variant="body2"
+            variant="body1"
             sx={{
-              fontFamily: poppins.style.fontFamily,
+              fontFamily: 'Poppins, sans-serif',
               maxWidth: "280px",
               margin: "auto",
             }}
@@ -146,9 +145,9 @@ export default function AboutMe() {
         </Grid2>
         <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center" }}>
           <Typography
-            variant="body2"
+            variant="body1"
             sx={{
-              fontFamily: poppins.style.fontFamily,
+              fontFamily: 'Poppins, sans-serif',
               maxWidth: "280px",
               margin: "auto",
             }}
@@ -161,9 +160,9 @@ export default function AboutMe() {
         </Grid2>
         <Grid2 size={{ xs: 12, md: 4 }} sx={{ textAlign: "center" }}>
           <Typography
-            variant="body2"
+            variant="body1"
             sx={{
-              fontFamily: poppins.style.fontFamily,
+              fontFamily: 'Poppins, sans-serif',
               maxWidth: "280px",
               margin: "auto",
             }}

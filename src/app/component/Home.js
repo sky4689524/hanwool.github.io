@@ -2,15 +2,9 @@ import { Typography, Box, Button, IconButton } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
-import poppins from "../utils/poppinsFont";
+
 
 export default function Home() {
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -41,7 +35,7 @@ export default function Home() {
             sx={{
               color: "black",
               mb: 1,
-              fontFamily: poppins.style.fontFamily,
+              fontFamily: "Poppins, sans-serif",
               fontWeight: "bold",
             }}
           >
@@ -52,14 +46,14 @@ export default function Home() {
             sx={{
               fontWeight: "bold",
               color: "black",
-              fontFamily: poppins.style.fontFamily,
+              fontFamily: "Poppins, sans-serif",
             }}
           >
             Hanwool Park
           </Typography>
           <Typography
             variant="subtitle1"
-            sx={{ color: "gray", mt: 1, fontFamily: poppins.style.fontFamily }}
+            sx={{ color: "gray", mt: 1, fontFamily: "Poppins, sans-serif" }}
           >
             Machine Learning Engineer / Full Stack Developer
           </Typography>
@@ -114,48 +108,56 @@ export default function Home() {
               gap: 2,
             }}
           >
-            <Button
-              sx={{
-                color: "white",
-                textTransform: "none",
-                fontFamily: poppins.style.fontFamily,
-              }}
-              onClick={() => scrollToSection("about-me")}
-            >
-              About me
-            </Button>
-            <Button
-              sx={{
-                color: "white",
-                textTransform: "none",
-                fontFamily: poppins.style.fontFamily,
-              }}
-              onClick={() => scrollToSection("skills")}
-            >
-              Skills
-            </Button>
-            <Button
-              sx={{
-                color: "white",
-                textTransform: "none",
-                fontFamily: poppins.style.fontFamily,
-              }}
-              onClick={() => scrollToSection("portfolio")}
-            >
-              Portfolio
-            </Button>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "white",
-                color: "black",
-                borderRadius: "20px",
-                fontFamily: poppins.style.fontFamily,
-              }}
-              onClick={() => scrollToSection("contact")}
-            >
-              CONTACT ME
-            </Button>
+            <a href="#about-me" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  color: "white",
+                  textTransform: "none",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "15px",
+                }}
+              >
+                About me
+              </Button>
+            </a>
+            <a href="#skills" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  color: "white",
+                  textTransform: "none",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "15px",
+                }}
+              >
+                Skills
+              </Button>
+            </a>
+            <a href="#portfolio" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  color: "white",
+                  textTransform: "none",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "15px",
+                }}
+              >
+                Portfolio
+              </Button>
+            </a>
+            <a href="#contact" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  borderRadius: "20px",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "15px",
+                }}
+              >
+                CONTACT ME
+              </Button>
+            </a>
           </Box>
 
           {/* Profile Image (Centered) */}

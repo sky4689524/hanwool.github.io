@@ -1,5 +1,4 @@
 import { Box, Typography, Grid2 } from "@mui/material";
-import poppins from "../utils/poppinsFont";
 
 const skills = {
   languages: [
@@ -76,7 +75,7 @@ export default function Skills() {
           variant="h4"
           sx={{
             fontWeight: "bold",
-            fontFamily: poppins.style.fontFamily,
+            fontFamily: "Poppins, sans-serif",
           }}
         >
           SKILLS
@@ -99,7 +98,7 @@ export default function Skills() {
             sx={{
               fontWeight: "bold",
               textAlign: "left",
-              fontFamily: poppins.style.fontFamily,
+              fontFamily: "Poppins, sans-serif",
               mb: 5,
             }}
           >
@@ -124,7 +123,7 @@ export default function Skills() {
                 />
                 <Typography
                   variant="body2"
-                  sx={{ mt: 1, fontFamily: poppins.style.fontFamily }}
+                  sx={{ mt: 1, fontFamily: "Poppins, sans-serif" }}
                 >
                   {skill.name}
                 </Typography>

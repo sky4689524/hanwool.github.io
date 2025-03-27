@@ -11,7 +11,6 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import poppins from "../utils/poppinsFont";
 import portfolioItems from "../portfolio/portfolioItems";
 
 export default function Portfolio() {
@@ -70,7 +69,7 @@ export default function Portfolio() {
           variant="h4"
           sx={{
             fontWeight: "bold",
-            fontFamily: poppins.style.fontFamily,
+            fontFamily: "Poppins, sans-serif",
           }}
         >
           Portfolio
@@ -84,7 +83,7 @@ export default function Portfolio() {
           marginBottom: "20px",
           "& .MuiTabs-indicator": { backgroundColor: "black" },
           "& .MuiTab-root": {
-            fontFamily: poppins.style.fontFamily,
+            fontFamily: "Poppins, sans-serif",
             fontWeight: "bold",
             color: "black",
             textTransform: "uppercase",
@@ -117,7 +116,7 @@ export default function Portfolio() {
             pb: 1,
             "&::-webkit-scrollbar": { display: "none" },
             justifyContent:
-              getItemsByTab(tab).length < 4 ? "center" : "flex-start", 
+              getItemsByTab(tab).length < 4 ? "center" : "flex-start",
           }}
         >
           {getItemsByTab(tab).map((item, index) => (
@@ -155,7 +154,7 @@ export default function Portfolio() {
                 sx={{
                   fontWeight: "bold",
                   fontSize: "15px",
-                  fontFamily: poppins.style.fontFamily,
+                  fontFamily: "Poppins, sans-serif",
                   mb: 1,
                 }}
               >
@@ -182,7 +181,7 @@ export default function Portfolio() {
                         px: 1,
                         py: 0.5,
                         borderRadius: "6px",
-                        fontFamily: poppins.style.fontFamily,
+                        fontFamily: "Poppins, sans-serif",
                       }}
                     >
                       {tag}
@@ -196,7 +195,7 @@ export default function Portfolio() {
                   sx={{
                     color: "gray",
                     fontSize: "12px",
-                    fontFamily: poppins.style.fontFamily,
+                    fontFamily: "Poppins, sans-serif",
                   }}
                 >
                   {item.dateRange}
@@ -239,7 +238,7 @@ export default function Portfolio() {
             <DialogTitle
               sx={{
                 fontWeight: "bold",
-                fontFamily: poppins.style.fontFamily,
+                fontFamily: "Poppins, sans-serif",
                 textAlign: "center",
                 position: "relative",
               }}
