@@ -128,8 +128,7 @@ export default function AboutMe() {
         ].map((item, idx) => (
           <Grid2
             key={idx}
-            xs={12}
-            md={4}
+            size = {{xs : 12, md : 4}}
             sx={{
               textAlign: "center",
               display: "flex",

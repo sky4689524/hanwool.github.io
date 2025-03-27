@@ -24,7 +24,12 @@ export default function InfoSection() {
       }}
     >
       {/* Left Side */}
-      <Box sx={{ flex: 1, ml: 20 }}>
+      <Box
+        sx={{
+          flex: 1,
+          ml: { xs: 0, sm: 2, md: 1 }, 
+        }}
+      >
         <Typography
           variant="h5"
           sx={{
