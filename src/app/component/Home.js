@@ -2,12 +2,20 @@ import { Typography, Box, Button, IconButton } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+  const router = useRouter();
+
+  const handleNavigation = (section) => {
+    if (section === "blog") {
+      router.push("/blog");
+    } else {
+      const target = document.getElementById(section);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+        router.push(`/#${section}`);
+      }
     }
   };
 
@@ -124,64 +132,45 @@ export default function Home() {
               width: "100%",
               display: "flex",
               justifyContent: { xs: "center", md: "flex-end" },
-              gap: { xs: 1, sm: 1.5, md: 2 },
+              gap: { xs: 0.5, sm: 1, md: 1.5 },
               flexWrap: "wrap",
               mt: { xs: 2, md: 0 },
             }}
           >
+            {["home", "about-me", "skills", "portfolio", "contact"].map(
+              (section) => (
+                <Button
+                  key={section}
+                  sx={{
+                    color: "white",
+                    textTransform: "none",
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: { xs: "9px", sm: "16px", md: "16px" },
+                    paddingX: { xs: "4px", sm: "6px", md: "10px" },
+                    paddingY: { xs: "3px", sm: "4px", md: "6px" },
+                    minWidth: "auto",
+                  }}
+                  onClick={() => handleNavigation(section)}
+                >
+                  {section.replace("-", " ").toUpperCase()}
+                </Button>
+              )
+            )}
+
             <Button
-              sx={{
-                color: "white",
-                textTransform: "none",
-                fontFamily: "Poppins, sans-serif",
-                fontSize: { xs: "10px", sm: "12px", md: "18px" },
-                paddingX: { xs: "6px", sm: "10px", md: "16px" },
-                paddingY: { xs: "4px", sm: "6px", md: "8px" },
-              }}
-              onClick={() => scrollToSection("about-me")}
-            >
-              About me
-            </Button>
-            <Button
-              sx={{
-                color: "white",
-                textTransform: "none",
-                fontFamily: "Poppins, sans-serif",
-                fontSize: { xs: "10px", sm: "12px", md: "18px" },
-                paddingX: { xs: "6px", sm: "10px", md: "16px" },
-                paddingY: { xs: "4px", sm: "6px", md: "8px" },
-              }}
-              onClick={() => scrollToSection("skills")}
-            >
-              Skills
-            </Button>
-            <Button
-              sx={{
-                color: "white",
-                textTransform: "none",
-                fontFamily: "Poppins, sans-serif",
-                fontSize: { xs: "10px", sm: "12px", md: "18px" },
-                paddingX: { xs: "6px", sm: "10px", md: "16px" },
-                paddingY: { xs: "4px", sm: "6px", md: "8px" },
-              }}
-              onClick={() => scrollToSection("portfolio")}
-            >
-              Portfolio
-            </Button>
-            <Button
-              variant="contained"
               sx={{
                 backgroundColor: "white",
                 color: "black",
                 borderRadius: "20px",
                 fontFamily: "Poppins, sans-serif",
-                fontSize: { xs: "10px", sm: "12px", md: "18px" },
-                paddingX: { xs: "6px", sm: "10px", md: "16px" },
-                paddingY: { xs: "4px", sm: "6px", md: "8px" },
+                fontSize: { xs: "9px", sm: "16px", md: "16px" },
+                paddingX: { xs: "6px", sm: "8px", md: "12px" },
+                paddingY: { xs: "3px", sm: "4px", md: "6px" },
+                minWidth: "auto",
               }}
-              onClick={() => scrollToSection("contact")}
+              onClick={() => handleNavigation("blog")}
             >
-              CONTACT ME
+              BLOG
             </Button>
           </Box>
 
