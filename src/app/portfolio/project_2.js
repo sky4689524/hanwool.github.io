@@ -1,23 +1,20 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { Box, Typography } from "@mui/material";
 
 const markdownContent = `
-# Perfect Shapes – A Cross-Platform Drawing Challenge
-
-<br />
-
 ![Perfect Shapes Screenshot](/projects/project_2.png)
 
-<br />
 
 ## Introduction
 
-<br />
 
 ### Perfect Shapes – A Cross-Platform Drawing Challenge
 
-<br />
 
 **Project Overview:**  
 Perfect Shapes is a mobile app I developed for iOS and Android using Flutter, designed to combine precision and creativity in a drawing challenge. The app features both single-player and offline multiplayer modes, allowing users to practice their drawing skills solo or take turns competing with friends on the same device.
@@ -71,11 +68,9 @@ Perfect Shapes showcases my ability to develop innovative applications that blen
 
 ---
 
-<br />
 
 ## Implementation
 
-<br />
 
 - **Project Setup and Framework Selection:**
     - **Framework:** Chose Flutter for its cross-platform capabilities, allowing a single codebase for both iOS and Android, which reduced development time and ensured consistent functionality across platforms.
@@ -105,75 +100,150 @@ Perfect Shapes showcases my ability to develop innovative applications that blen
     - **Platforms:** Deployed to both Apple App Store and Google Play Store, managing platform-specific requirements like app icons, permissions, and performance benchmarks.
     - **Continuous Improvement:** Regularly updated the app with new features and enhancements based on user feedback, manually iterating on the design and functionality to keep the app engaging and up-to-date.
 
-<br />
 
 ---
 
-<br />
 
 ## Troubleshooting
 
-<br />
 
 The development process was relatively swift, aided significantly by using GPT for coding assistance. However, the main challenge arose during the deployment phase, particularly in finding enough testers for the Android version. To address this, I needed around 20 testers, which took some time to arrange. I successfully overcame this hurdle by reaching out to communities on Reddit, where I was able to gather the necessary testers to refine and finalize the app.
 `;
 
 export default function Project2() {
   return (
-    <div
-      style={{
-        fontFamily: "Poppins, sans-serif",
-        padding: "10px",
-        fontSize: "16px",
-        lineHeight: "2",
-      }}
-    >
-      <ReactMarkdown
-        rehypePlugins={[rehypeRaw]}
-        components={{
-          img: ({ node, ...props }) => (
-            <img
-              {...props}
-              style={{
-                width: "100%",
-                maxWidth: "400px",
-                borderRadius: "10px",
-                margin: "10px auto",
-                display: "block",
-              }}
-              alt={props.alt}
-            />
-          ),
-          ul: ({ node, ...props }) => (
-            <ul
-              style={{
-                paddingLeft: "1.5rem", 
-                marginBottom: "1rem",
-              }}
-              {...props}
-            />
-          ),
-          ol: ({ node, ...props }) => (
-            <ol
-              style={{
-                paddingLeft: "1.5rem",
-                marginBottom: "1rem",
-              }}
-              {...props}
-            />
-          ),
-          li: ({ node, ...props }) => (
-            <li
-              style={{
-                marginBottom: "0.5rem", 
-              }}
-              {...props}
-            />
-          ),
+      <Box
+        sx={{
+          fontFamily: "Poppins, sans-serif",
+          maxWidth: "800px",
+          mx: "auto",
+          px: { xs: 2, md: 4 },
+          py: { xs: 4, md: 6 },
+          lineHeight: 2,
         }}
       >
-        {markdownContent}
-      </ReactMarkdown>
-    </div>
-  );
-}
+        <Typography
+          variant="h4"
+          sx={{ fontWeight: "bold", marginBottom: "2rem" }}
+          gutterBottom
+        >
+          Perfect Shapes – A Cross-Platform Drawing Challenge
+        </Typography>
+  
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={{
+            img: ({ node, ...props }) => (
+              <img
+                {...props}
+                style={{
+                  width: "100%",
+                  maxWidth: "400px",
+                  borderRadius: "10px",
+                  margin: "10px auto",
+                  display: "block",
+                }}
+                alt={props.alt}
+              />
+            ),
+            ul: ({ node, ...props }) => (
+              <ul
+                style={{
+                  paddingLeft: "1.5rem",
+                  marginBottom: "1rem",
+                }}
+                {...props}
+              />
+            ),
+            ol: ({ node, ...props }) => (
+              <ol
+                style={{
+                  paddingLeft: "1.5rem",
+                  marginBottom: "1rem",
+                }}
+                {...props}
+              />
+            ),
+            li: ({ node, ...props }) => (
+              <li
+                style={{
+                  marginBottom: "0.5rem",
+                }}
+                {...props}
+              />
+            ),
+            a: ({ node, ...props }) => (
+              <a
+                style={{
+                  color: "#1e90ff",
+                }}
+                {...props}
+              />
+            ),
+            h1: ({ node, ...props }) => (
+              <h1
+                style={{ marginTop: "2rem", marginBottom: "2rem" }}
+                {...props}
+              />
+            ),
+            h2: ({ node, ...props }) => (
+              <h2
+                style={{ marginTop: "2rem", marginBottom: "2rem" }}
+                {...props}
+              />
+            ),
+            h3: ({ node, ...props }) => (
+              <h3
+                style={{ marginTop: "2rem", marginBottom: "2rem" }}
+                {...props}
+              />
+            ),
+            hr: ({ node, ...props }) => (
+              <hr
+                style={{
+                  marginTop: "2rem",
+                  marginBottom: "2rem",
+                }}
+                {...props}
+              />
+            ),
+            code({ node, inline, className, children, ...props }) {
+              const match = /language-(\w+)/.exec(className || "");
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  style={materialDark}
+                  language={match[1]}
+                  PreTag="div"
+                  customStyle={{
+                    fontSize: "0.85em",
+                    borderRadius: "8px",
+                  }}
+                  {...props}
+                >
+                  {String(children).replace(/\n$/, "")}
+                </SyntaxHighlighter>
+              ) : (
+                <code
+                  style={{
+                    backgroundColor: "#e0e0e0",
+                    color: "#333",
+                    padding: "0.2em 0.4em",
+                    borderRadius: "4px",
+                    fontSize: "0.9em",
+                    fontFamily: "monospace",
+                  }}
+                  {...props}
+                >
+                  {children}
+                </code>
+              );
+            },
+          }}
+        >
+          {markdownContent}
+        </ReactMarkdown>
+      </Box>
+    );
+  }
+  

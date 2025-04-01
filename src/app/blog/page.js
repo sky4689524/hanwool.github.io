@@ -1,26 +1,12 @@
-import { Box, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
+import { getAllPosts } from "./lib/getMarkdownPosts";
+import BlogListClient from "./BlogListClient";
 
-export default function Blog() {
-  return (
-    <Box sx={{ p: 4, maxWidth: 800, mx: 'auto' }}>
-      <Typography variant="h2" gutterBottom>
-        My Blog
-      </Typography>
-      <List>
-        <ListItem>
-          <ListItemText
-            primary="Post 1: My First Post"
-            secondary="A brief teaser about this post."
-            sx={{ '&:hover': { color: 'primary.main' } }}
-          />
-          <Button variant="outlined" href="/blog/post-1">
-            Read
-          </Button>
-        </ListItem>
-      </List>
-      <Button variant="contained" href="/" sx={{ mt: 2 }}>
-        Back to Portfolio
-      </Button>
-    </Box>
-  );
+
+export const metadata = {
+  title: "Blog",
+};
+
+export default async function BlogPage() {
+  const posts = await getAllPosts();
+  return <BlogListClient posts={posts} />;
 }

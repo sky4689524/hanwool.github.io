@@ -1,20 +1,19 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { Box, Typography } from "@mui/material";
 
 const markdownContent = `
-# Interpreter App
 
 ![Interpreter Screenshot](/projects/project_1.png)
-<br />
 
 ## Introduction
 
-<br />
-
 ### Interpreter – Your Live Translation Companion
 
-<br />
 
 **Project Overview:**  
 Interpreter is a live translation app developed using Flutter, designed to bridge language barriers by supporting all languages through GPT-4. The app aims to help people communicate seamlessly across different languages, offering both text and voice recognition features. Translations are provided in real-time, displayed on-screen and spoken aloud, making it ideal for dynamic conversational use.
@@ -46,7 +45,6 @@ Interpreter is designed to make communication across different languages more ac
 
 ## App Video
 
-<br />
 
 <div style="text-align: center">
   <iframe 
@@ -62,11 +60,9 @@ Interpreter is designed to make communication across different languages more ac
 
 ---
 
-<br />
 
 ## Implementation
 
-<br />
 
 **Integration with OpenAI Models:**  
 Interpreter utilizes a combination of OpenAI models to achieve seamless speech-to-speech translation, overcoming the lack of a fully integrated solution by chaining specific models for each task:
@@ -95,11 +91,9 @@ Built with Flutter, the app is designed to function consistently across both And
 **Outcome:**  
 By integrating Whisper-1 for speech recognition, GPT-4 for translation, and TTS-1 for speech synthesis, Interpreter effectively delivers a comprehensive speech-to-speech translation experience. This implementation demonstrates my ability to creatively utilize and optimize multiple OpenAI models, providing a practical solution that addresses language barriers with advanced AI capabilities.
 
-<br />
 
 ---
 
-<br />
 
 ## Troubleshooting
 
@@ -110,15 +104,26 @@ Moreover, the use of high-quality models via these APIs incurred significant cos
 
 export default function Project1() {
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         fontFamily: "Poppins, sans-serif",
-        padding: "10px",
-        fontSize: "16px",
-        lineHeight: "2",
+        maxWidth: "800px",
+        mx: "auto",
+        px: { xs: 2, md: 4 },
+        py: { xs: 4, md: 6 },
+        lineHeight: 2,
       }}
     >
+      <Typography
+        variant="h4"
+        sx={{ fontWeight: "bold", marginBottom: "2rem" }}
+        gutterBottom
+      >
+        Interpreter App
+      </Typography>
+
       <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
           img: ({ node, ...props }) => (
@@ -137,7 +142,7 @@ export default function Project1() {
           ul: ({ node, ...props }) => (
             <ul
               style={{
-                paddingLeft: "1.5rem", 
+                paddingLeft: "1.5rem",
                 marginBottom: "1rem",
               }}
               {...props}
@@ -155,15 +160,81 @@ export default function Project1() {
           li: ({ node, ...props }) => (
             <li
               style={{
-                marginBottom: "0.5rem", 
+                marginBottom: "0.5rem",
               }}
               {...props}
             />
           ),
+          a: ({ node, ...props }) => (
+            <a
+              style={{
+                color: "#1e90ff",
+              }}
+              {...props}
+            />
+          ),
+          h1: ({ node, ...props }) => (
+            <h1
+              style={{ marginTop: "2rem", marginBottom: "2rem" }}
+              {...props}
+            />
+          ),
+          h2: ({ node, ...props }) => (
+            <h2
+              style={{ marginTop: "2rem", marginBottom: "2rem" }}
+              {...props}
+            />
+          ),
+          h3: ({ node, ...props }) => (
+            <h3
+              style={{ marginTop: "2rem", marginBottom: "2rem" }}
+              {...props}
+            />
+          ),
+          hr: ({ node, ...props }) => (
+            <hr
+              style={{
+                marginTop: "2rem",
+                marginBottom: "2rem",
+              }}
+              {...props}
+            />
+          ),
+          code({ node, inline, className, children, ...props }) {
+            const match = /language-(\w+)/.exec(className || "");
+            return !inline && match ? (
+              <SyntaxHighlighter
+                style={materialDark}
+                language={match[1]}
+                PreTag="div"
+                customStyle={{
+                  fontSize: "0.85em",
+                  borderRadius: "8px",
+                }}
+                {...props}
+              >
+                {String(children).replace(/\n$/, "")}
+              </SyntaxHighlighter>
+            ) : (
+              <code
+                style={{
+                  backgroundColor: "#e0e0e0",
+                  color: "#333",
+                  padding: "0.2em 0.4em",
+                  borderRadius: "4px",
+                  fontSize: "0.9em",
+                  fontFamily: "monospace",
+                }}
+                {...props}
+              >
+                {children}
+              </code>
+            );
+          },
         }}
       >
         {markdownContent}
       </ReactMarkdown>
-    </div>
+    </Box>
   );
 }

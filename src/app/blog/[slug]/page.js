@@ -1,47 +1,24 @@
-import React from "react";
+import { getAllPosts } from "../lib/getMarkdownPosts";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import { format } from "date-fns";
+import { Box, Typography } from "@mui/material";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { Box, Typography } from "@mui/material";
 
-const markdownContent = `
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
-This paper presents an FPGA-based accelerator design technique for a deep convolutional neural network (DCNN) aimed at recognizing handwritten Hangul characters. The proposed design achieves a recognition time of approximately 11.9 milliseconds per character.
+export default async function BlogPostPage(props) {
+  const posts = await getAllPosts();
+  const { slug } = props.params;
+  const post = posts.find((p) => p.slug === slug);
 
-<br />
+  if (!post) return <div>Not found</div>;
 
-## 🚀 Key Features
-- **FPGA-based Accelerator**: Implements a DCNN accelerator on FPGA to enhance processing speed and efficiency.
-- **Handwritten Hangul Recognition**: Focuses on the unique challenges of recognizing handwritten Hangul characters.
-- **Optimized Performance**: Achieves a recognition time of about 11.9 milliseconds per character, demonstrating the efficiency of the design.
-
-<br />
-
-## ⚙️ Technologies Used
-- **Deep Convolutional Neural Networks (DCNN)**: Utilized for feature extraction and classification tasks.
-- **Field Programmable Gate Arrays (FPGA)**: Serves as the hardware platform for implementing the DCNN accelerator.
-- **Hardware Optimization Techniques**: Applied to enhance the performance and efficiency of the FPGA implementation.
-
-<br />
-
-## Purpose
-The primary objective of this research is to develop an optimized FPGA-based implementation of DCNNs to enable real-time recognition of handwritten Hangul characters. By addressing the computational challenges associated with DCNNs, the study aims to contribute to the advancement of efficient hardware accelerators for complex neural network models.
-
-<br />
-
----
-
-<br />
-
-## 📚 Publication Info
-**Presented at:** Journal of Computing Science and Engineering (JCSE)  
-**Link:** [JCSE](https://www.researchgate.net/publication/324412367_Toward_Optimal_FPGA_Implementation_of_Deep_Convolutional_Neural_Networks_for_Handwritten_Hangul_Character_Recognition)  
-
-`;
-
-export default function HandwrittenHangulRecognition() {
   return (
     <Box
       sx={{
@@ -53,13 +30,11 @@ export default function HandwrittenHangulRecognition() {
         lineHeight: 2,
       }}
     >
-      <Typography
-        variant="h4"
-        sx={{ fontWeight: "bold", marginBottom: "2rem" }}
-        gutterBottom
-      >
-        Toward Optimal FPGA Implementation of Deep Convolutional Neural Networks
-        for Handwritten Hangul Character Recognition
+      <Typography variant="h4" gutterBottom>
+        {post.title}
+      </Typography>
+      <Typography variant="body2" color="text.secondary" gutterBottom>
+        {format(new Date(post.date), "yyyy-MM-dd")}
       </Typography>
 
       <ReactMarkdown
@@ -148,7 +123,7 @@ export default function HandwrittenHangulRecognition() {
                 language={match[1]}
                 PreTag="div"
                 customStyle={{
-                  fontSize: "0.85em",
+                  fontSize: "0.85em", 
                   borderRadius: "8px",
                 }}
                 {...props}
@@ -158,7 +133,7 @@ export default function HandwrittenHangulRecognition() {
             ) : (
               <code
                 style={{
-                  backgroundColor: "#e0e0e0",
+                  backgroundColor: "#e0e0e0", 
                   color: "#333",
                   padding: "0.2em 0.4em",
                   borderRadius: "4px",
@@ -173,7 +148,7 @@ export default function HandwrittenHangulRecognition() {
           },
         }}
       >
-        {markdownContent}
+        {post.content}
       </ReactMarkdown>
     </Box>
   );

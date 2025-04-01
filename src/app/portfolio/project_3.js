@@ -1,19 +1,16 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { Box, Typography } from "@mui/material";
 
 const markdownContent = `
-# TranscribeTube – AI-Powered Subtitle Generator
-
-<br />
-
 ![TranscribeTube Screenshot](/projects/project_3.png)
 
-<br />
 
 ## Introduction
-
-<br />
 
 ### TranscribeTube
 
@@ -21,11 +18,10 @@ TranscribeTube is a Python-based tool I developed to simplify the transcription 
 
 As someone learning new languages, I use TranscribeTube to transcribe and create subtitles for videos, enhancing my understanding of spoken content in my target languages. The tool features an intuitive Gradio web interface, allowing me to easily upload videos, select transcription languages, and download subtitles in SRT format, making it a valuable resource for my language learning journey.
 
-<br />
+
 
 ## 🎬 Demo
 
-<br />
 
 This GIF demonstrates how easy it is to use TranscribeTube to transcribe and generate subtitles for videos.
 
@@ -43,7 +39,7 @@ This GIF demonstrates how easy it is to use TranscribeTube to transcribe and gen
 
 ---
 
-<br />
+
 
 ## Implementation
 
@@ -62,15 +58,12 @@ TranscribeTube utilizes a combination of powerful technologies to provide a seam
 
 To get started with TranscribeTube, users can clone the repository, install dependencies, and configure their Hugging Face API tokens in the \`config.yaml\` file. The main transcription script can be run to launch the Gradio interface, where users can upload videos, select languages, and manage their transcriptions.
 
-<br />
+
 
 ---
 
-<br />
-
 ## Troubleshooting
 
-<br />
 
 - **Real-Time Progress Hook with Gradio**:  
   Integrating real-time progress updates into the Gradio interface was challenging, especially when connecting the speaker diarization process to the Gradio progress bar. To solve this, I created a custom hook class that links the diarization model's progress with Gradio, allowing the interface to display updates in real time. This required a deep understanding of the model's processing flow and careful implementation to synchronize the progress accurately with the Gradio interface.
@@ -81,15 +74,26 @@ To get started with TranscribeTube, users can clone the repository, install depe
 
 export default function Project3() {
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         fontFamily: "Poppins, sans-serif",
-        padding: "10px",
-        fontSize: "16px",
-        lineHeight: "2",
+        maxWidth: "800px",
+        mx: "auto",
+        px: { xs: 2, md: 4 },
+        py: { xs: 4, md: 6 },
+        lineHeight: 2,
       }}
     >
+      <Typography
+        variant="h4"
+        sx={{ fontWeight: "bold", marginBottom: "2rem" }}
+        gutterBottom
+      >
+        TranscribeTube – AI-Powered Subtitle Generator
+      </Typography>
+
       <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
           img: ({ node, ...props }) => (
@@ -108,7 +112,7 @@ export default function Project3() {
           ul: ({ node, ...props }) => (
             <ul
               style={{
-                paddingLeft: "1.5rem", 
+                paddingLeft: "1.5rem",
                 marginBottom: "1rem",
               }}
               {...props}
@@ -126,15 +130,81 @@ export default function Project3() {
           li: ({ node, ...props }) => (
             <li
               style={{
-                marginBottom: "0.5rem", 
+                marginBottom: "0.5rem",
               }}
               {...props}
             />
           ),
+          a: ({ node, ...props }) => (
+            <a
+              style={{
+                color: "#1e90ff",
+              }}
+              {...props}
+            />
+          ),
+          h1: ({ node, ...props }) => (
+            <h1
+              style={{ marginTop: "2rem", marginBottom: "2rem" }}
+              {...props}
+            />
+          ),
+          h2: ({ node, ...props }) => (
+            <h2
+              style={{ marginTop: "2rem", marginBottom: "2rem" }}
+              {...props}
+            />
+          ),
+          h3: ({ node, ...props }) => (
+            <h3
+              style={{ marginTop: "2rem", marginBottom: "2rem" }}
+              {...props}
+            />
+          ),
+          hr: ({ node, ...props }) => (
+            <hr
+              style={{
+                marginTop: "2rem",
+                marginBottom: "2rem",
+              }}
+              {...props}
+            />
+          ),
+          code({ node, inline, className, children, ...props }) {
+            const match = /language-(\w+)/.exec(className || "");
+            return !inline && match ? (
+              <SyntaxHighlighter
+                style={materialDark}
+                language={match[1]}
+                PreTag="div"
+                customStyle={{
+                  fontSize: "0.85em",
+                  borderRadius: "8px",
+                }}
+                {...props}
+              >
+                {String(children).replace(/\n$/, "")}
+              </SyntaxHighlighter>
+            ) : (
+              <code
+                style={{
+                  backgroundColor: "#e0e0e0",
+                  color: "#333",
+                  padding: "0.2em 0.4em",
+                  borderRadius: "4px",
+                  fontSize: "0.9em",
+                  fontFamily: "monospace",
+                }}
+                {...props}
+              >
+                {children}
+              </code>
+            );
+          },
         }}
       >
         {markdownContent}
       </ReactMarkdown>
-    </div>
+    </Box>
   );
 }
