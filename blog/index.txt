@@ -1,0 +1,168 @@
+1:"$Sreact.fragment"
+2:I[94970,[],"ClientSegmentRoot"]
+3:I[43223,["145","static/chunks/145-9f7b322133726548.js","93","static/chunks/93-a63b23fb9cb5089e.js","177","static/chunks/app/layout-1c8f1cda755790f9.js"],"default"]
+4:I[87555,[],""]
+5:I[31295,[],""]
+7:I[52269,["145","static/chunks/145-9f7b322133726548.js","93","static/chunks/93-a63b23fb9cb5089e.js","782","static/chunks/782-a893ccf7142e9bee.js","461","static/chunks/461-271002c9bfb77eda.js","485","static/chunks/485-5adf196336df7512.js","709","static/chunks/709-4b414139a5ab409f.js","584","static/chunks/app/blog/layout-44309b9dba2f3b05.js"],"default"]
+8:I[52204,["145","static/chunks/145-9f7b322133726548.js","93","static/chunks/93-a63b23fb9cb5089e.js","782","static/chunks/782-a893ccf7142e9bee.js","461","static/chunks/461-271002c9bfb77eda.js","485","static/chunks/485-5adf196336df7512.js","709","static/chunks/709-4b414139a5ab409f.js","584","static/chunks/app/blog/layout-44309b9dba2f3b05.js"],"default"]
+a:I[59665,[],"OutletBoundary"]
+d:I[59665,[],"ViewportBoundary"]
+f:I[59665,[],"MetadataBoundary"]
+11:I[26614,[],""]
+:HL["/_next/static/css/eb556384bebb5334.css","style"]
+0:{"P":null,"b":"Xx_Srfz-nzLWtTwA9VIzg","p":"","c":["","blog",""],"i":false,"f":[[["",{"children":["blog",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/eb556384bebb5334.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L2",null,{"Component":"$3","slots":{"children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]},"params":{},"promise":"$@6"}]]}],{"children":["blog",["$","$1","c",{"children":[null,["$","$L7",null,{"sx":{"display":"flex","minHeight":"100vh","bgcolor":"#f5f5f5"},"children":[["$","$L8",null,{}],["$","$L7",null,{"component":"main","sx":{"flex":1,"ml":{"md":"250px"},"px":{"xs":2,"md":4},"py":{"xs":4,"md":6},"width":"100%"},"children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L9","$undefined",null,["$","$La",null,{"children":["$Lb","$Lc",null]}]]}],{},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","_QWEwizes9akJ9jnULtlZ",{"children":[["$","$Ld",null,{"children":"$Le"}],null]}],["$","$Lf",null,{"children":"$L10"}]]}],false]],"m":"$undefined","G":["$11","$undefined"],"s":false,"S":true}
+6:{}
+12:I[17919,["145","static/chunks/145-9f7b322133726548.js","93","static/chunks/93-a63b23fb9cb5089e.js","782","static/chunks/782-a893ccf7142e9bee.js","461","static/chunks/461-271002c9bfb77eda.js","319","static/chunks/319-62db3c202eb4185a.js","831","static/chunks/app/blog/page-59b85eea69d402e4.js"],"default"]
+13:Ted7,
+If you're deploying your **Next.js 13+** app to **GitHub Pages** and running into issues where your **JavaScript and CSS aren't loading**, you're not alone. This issue usually comes down to how GitHub Pages handles static files — especially those in folders that start with an underscore like `/_next`.
+
+Let me walk you through **how to fix it step-by-step**. 👇
+
+---
+
+## 🧠 The Problem
+
+By default, GitHub Pages uses **Jekyll**, which **ignores folders starting with `_`**, like:
+
+```
+/_next/static/...
+```
+
+This means your app's static assets (JS, CSS) won't be served — resulting in a broken site with missing styles and scripts. 😵
+
+---
+
+## ✅ The Solution
+
+### 1. Add `.nojekyll` file
+
+This file disables Jekyll processing on GitHub Pages.
+
+You can add this manually in the `out` folder after `next export`, or automatically via a script:
+
+```bash
+touch out/.nojekyll
+```
+
+Or use [`shx`](https://www.npmjs.com/package/shx) to make it cross-platform compatible (for Windows users):
+
+```bash
+npm install --save-dev shx
+```
+
+---
+
+### 2. Install `gh-pages`
+
+You’ll need the `gh-pages` package to deploy the `out` folder to your GitHub Pages branch.
+
+Install it with:
+
+```bash
+npm install --save-dev gh-pages
+```
+
+This tool will handle publishing your static site to the correct branch (typically `gh-pages` or `main`).
+
+---
+
+### 3. Update `next.config.js`
+
+Configure your app for static export:
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export', // Static export for GitHub Pages
+  basePath: '',     // Leave empty for username.github.io
+};
+
+module.exports = nextConfig;
+```
+
+> If you're deploying to a **project page** (e.g., `username.github.io/my-app`), set:
+>
+> ```js
+> basePath: '/my-app',
+> assetPrefix: '/my-app',
+> ```
+
+---
+
+### 4. Update your `package.json` scripts
+
+Here's what your scripts should look like:
+
+```json
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "export": "next export",
+  "postexport": "shx touch out/.nojekyll",
+  "deploy": "next build && npm run postexport && gh-pages -d out --nojekyll --cname https://yourusername.github.io"
+}
+```
+
+> 📝 Replace `https://yourusername.github.io` with your own domain or GitHub Pages URL.
+
+This setup:
+- Builds your app.
+- Exports it to the `out` folder.
+- Adds the `.nojekyll` file.
+- Deploys it with `gh-pages`.
+
+---
+
+## 🏁 Deployment Command
+
+Now you can deploy your app with:
+
+```bash
+npm run deploy
+```
+
+Boom 💥 — your Next.js site should be live and functional on GitHub Pages!
+
+---
+
+## 🔄 Choosing the GitHub Pages Branch
+
+If you’re using GitHub Pages, you need to **set the correct branch** in your repository settings:
+
+1. Go to your repository on GitHub.
+2. Click on **Settings** → **Pages** (left sidebar).
+3. Under **"Build and deployment"**, choose:
+   - **Source:** `Deploy from a branch`
+   - **Branch:** Select the branch (e.g., `gh-pages`) and `/ (root)` folder.
+4. Click **Save**.
+
+After a few seconds, GitHub Pages will publish your site!
+
+> ⚠️ Make sure that the branch you're deploying to (`gh-pages` by default) is **not ignored** in your `.gitignore`.
+
+---
+
+## 🔗 Bonus Tips
+
+- For **custom domains**, update the `--cname` flag in your deploy script.
+- For **project pages**, use a non-empty `basePath` and `assetPrefix`.
+- You can even automate deploys using GitHub Actions for CI/CD.
+
+---
+
+## 📦 Example Repo
+
+Here’s a working example: [sky4689524.github.io](https://github.com/sky4689524/sky4689524.github.io)
+
+---
+
+## 🧰 Tools Used
+
+- [Next.js 13+](https://nextjs.org/)
+- [gh-pages](https://www.npmjs.com/package/gh-pages)
+- [shx](https://www.npmjs.com/package/shx)
+9:["$","$L12",null,{"posts":[{"slug":"fixing_nextJS_Github_pages","title":"Fixing JS and CSS Not Loading in Next.js on GitHub Pages","date":"$D2025-03-31T00:00:00.000Z","tags":["web-development"],"content":"$13"}]}]
+e:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+b:null
+c:null
+10:[["$","title","0",{"children":"Blog"}],["$","link","1",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"16x16"}]]
