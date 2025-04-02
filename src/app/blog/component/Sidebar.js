@@ -16,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import { useState } from "react";
 import { slugify } from "../utils/slugify";
+import { useRouter } from "next/navigation";
 
 const categories = [
   "AI",
@@ -29,6 +30,8 @@ export default function BlogSidebar() {
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const router = useRouter();
+
   const toggleDrawer = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -37,8 +40,11 @@ export default function BlogSidebar() {
   const sidebarContent = (
     <Box sx={{ width: 250, p: 2 }}>
       <Button
-        component={Link}
-        href="/"
+        onClick={() => {
+          setTimeout(() => {
+            router.push("/");
+          }, 500);
+        }}
         variant="text"
         sx={{
           fontWeight: "bold",

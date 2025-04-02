@@ -1,9 +1,9 @@
-import { getAllPosts } from "../../lib/getMarkdownPosts";
+import { getCachedPosts } from "../../lib/postsStore";
 import BlogListClient from "../../BlogListClient";
 import { Box, Typography, Paper } from "@mui/material";
 
 export default async function PersonalGrowthCategoryPage() {
-  const allPosts = await getAllPosts(); 
+  const allPosts = await getCachedPosts();
   const posts = allPosts.filter((post) =>
     post.tags.map((t) => t.toLowerCase()).includes("personal-growth")
   );

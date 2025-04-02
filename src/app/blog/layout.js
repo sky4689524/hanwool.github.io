@@ -9,7 +9,7 @@ export default function BlogLayout({ children }) {
         component="main"
         sx={{
           flex: 1,
-          ml: { md: "250px" }, // Reserve space for fixed sidebar
+          ml: { md: "250px" },
           px: { xs: 2, md: 4 },
           py: { xs: 4, md: 6 },
           width: "100%",

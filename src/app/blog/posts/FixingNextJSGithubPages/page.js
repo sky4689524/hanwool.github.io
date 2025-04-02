@@ -1,4 +1,5 @@
-import { getAllPosts } from "../lib/getMarkdownPosts";
+import markdownContent from "./FixingNextJSGithubPages";
+import postsMeta from "../postsMeta.json";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
@@ -7,17 +8,12 @@ import { Box, Typography } from "@mui/material";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
-export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return posts.map((post) => ({ slug: post.slug }));
-}
+import { notFound } from "next/navigation";
 
-export default async function BlogPostPage(props) {
-  const posts = await getAllPosts();
-  const { slug } = props.params;
-  const post = posts.find((p) => p.slug === slug);
+export default function FixingNextJSGithubPagesPage() {
+  const post = postsMeta.find((p) => p.filename === "FixingNextJSGithubPages");
 
-  if (!post) return <div>Not found</div>;
+  if (!post) return notFound();
 
   return (
     <Box
@@ -28,12 +24,13 @@ export default async function BlogPostPage(props) {
         px: { xs: 2, md: 4 },
         py: { xs: 4, md: 6 },
         lineHeight: 2,
+        color: "black",
       }}
     >
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4"  sx={{ color: "black" }} gutterBottom>
         {post.title}
       </Typography>
-      <Typography variant="body2" color="text.secondary" gutterBottom>
+      <Typography variant="body2"  sx={{ color: "grey" }} gutterBottom>
         {format(new Date(post.date), "yyyy-MM-dd")}
       </Typography>
 
@@ -123,7 +120,7 @@ export default async function BlogPostPage(props) {
                 language={match[1]}
                 PreTag="div"
                 customStyle={{
-                  fontSize: "0.85em", 
+                  fontSize: "0.85em",
                   borderRadius: "8px",
                 }}
                 {...props}
@@ -133,7 +130,7 @@ export default async function BlogPostPage(props) {
             ) : (
               <code
                 style={{
-                  backgroundColor: "#e0e0e0", 
+                  backgroundColor: "#e0e0e0",
                   color: "#333",
                   padding: "0.2em 0.4em",
                   borderRadius: "4px",
@@ -148,7 +145,7 @@ export default async function BlogPostPage(props) {
           },
         }}
       >
-        {post.content}
+        {markdownContent}
       </ReactMarkdown>
     </Box>
   );

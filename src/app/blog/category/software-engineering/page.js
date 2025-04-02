@@ -1,9 +1,10 @@
-import { getAllPosts } from "../../lib/getMarkdownPosts";
+import { getCachedPosts } from "../../lib/postsStore";
 import BlogListClient from "../../BlogListClient";
 import { Box, Typography, Paper } from "@mui/material";
 
+
 export default async function SoftwareEngineeringCategoryPage() {
-  const allPosts = await getAllPosts();
+  const allPosts = await getCachedPosts();
   const posts = allPosts.filter((post) =>
     post.tags.map((t) => t.toLowerCase()).includes("software-engineering")
   );
