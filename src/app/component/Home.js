@@ -9,11 +9,7 @@ export default function Home() {
 
   const handleNavigation = (section) => {
     if (section === "blog") {
-      router.prefetch?.("/blog");
-
-      setTimeout(() => {
-        router.push("/blog");
-      }, 500);
+      window.open("https://tech-noobie.tistory.com/", "_blank");
     } else {
       const target = document.getElementById(section);
       if (target) {
