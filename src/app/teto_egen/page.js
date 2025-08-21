@@ -3,6 +3,26 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Inter, Noto_Sans_KR } from "next/font/google";
+import {
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  GlobalStyles,
+  AppBar,
+  Toolbar,
+  Container,
+  Box,
+  Button,
+  Chip,
+  Typography,
+  Stack,
+  Grid,
+  Card,
+  CardContent,
+  Link as MUILink,
+} from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+import { alpha } from "@mui/material/styles";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const noto = Noto_Sans_KR({
@@ -12,468 +32,541 @@ const noto = Noto_Sans_KR({
 });
 
 export default function Page() {
-  const [lang, setLang] = useState("ko"); // "ko" | "en"
+  const [lang, setLang] = useState("ko");
 
-  const t = {
-    ko: {
-      appname: "테토 vs 에겐",
-      badge: "한국어",
-      titleTop: "에겐? 테토?",
-      titleMain: "나의 타입은?",
-      subtitle: "12문항으로 알아보는 내 연애 성향 - 테토 vs 에겐",
-      pitch:
-        "재미로만 보는 테스트가 아닙니다! 당신의 성향을 정확하게 분석하고, 에겐/테토 지수를 점수로 알려드립니다. 한국에서 2025년 가장 핫한 성격 유형 테스트, 지금 바로 시작하세요!",
-      featuresTitle: "특징",
-      features: [
-        "단 12문항, 3분이면 완료",
-        "에겐/테토 성향 점수 + 분석 리포트 제공",
-        "한국어 / 영어 지원",
-        "결과를 친구와 쉽게 공유",
-      ],
-      hook: "나는 에겐일까, 테토일까? 이제 직접 확인해보세요!",
-      ctaPrimary: "테스트 시작하기",
-      ctaSecondary: "앱 스토어에서 보기",
-      galleryTitle: "앱 미리보기",
-      alt1: "성별 선택 화면",
-      alt2: "질문 화면",
-      alt3: "결과 화면",
-    },
-    en: {
-      appname: "Teto vs Egen",
-      badge: "English",
-      titleTop: "Egen? Teto?",
-      titleMain: "What’s My Type?",
-      subtitle: "Discover Your Dating Style – Teto vs Egen in Just 12 Questions",
-      pitch:
-        "This isn't just another fun quiz! Get an accurate analysis of your personality and see your Egen/Teto score instantly. The hottest personality trend in Korea (2025) — find out where you belong!",
-      featuresTitle: "Features",
-      features: [
-        "Just 12 questions, done in 3 minutes",
-        "Detailed Egen/Teto score + analysis",
-        "Available in Korean & English",
-        "Easy sharing with friends",
-      ],
-      hook: "Am I more Egen or Teto? Find out now!",
-      ctaPrimary: "Start the Test",
-      ctaSecondary: "View on App Store",
-      galleryTitle: "App Preview",
-      alt1: "Gender selection screen",
-      alt2: "Question screen",
-      alt3: "Result screen",
-    },
-  }[lang];
+  const t =
+    {
+      ko: {
+        appname: "테토 vs 에겐",
+        badge: "한국어",
+        titleTop: "에겐? 테토?",
+        titleMain: "나의 타입은?",
+        subtitle: "12문항으로 알아보는 내 연애 성향 - 테토 vs 에겐",
+        pitch:
+          "재미로만 보는 테스트가 아닙니다! 당신의 성향을 정확하게 분석하고, 에겐/테토 지수를 점수로 알려드립니다. 한국에서 2025년 가장 핫한 성격 유형 테스트, 지금 바로 시작하세요!",
+        featuresTitle: "특징",
+        features: [
+          "단 12문항, 3분이면 완료",
+          "에겐/테토 성향 점수 + 분석 리포트 제공",
+          "한국어 / 영어 지원",
+          "결과를 친구와 쉽게 공유",
+        ],
+        hook: "나는 에겐일까, 테토일까? 이제 직접 확인해보세요!",
+        ctaPrimary: "테스트 시작하기",
+        ctaSecondary: "앱 스토어에서 보기",
+        galleryTitle: "앱 미리보기",
+        alt1: "성별 선택 화면",
+        alt2: "질문 화면",
+        alt3: "결과 화면",
+      },
+      en: {
+        appname: "Teto vs Egen",
+        badge: "English",
+        titleTop: "Egen? Teto?",
+        titleMain: "What’s My Type?",
+        subtitle:
+          "Discover Your Dating Style – Teto vs Egen in Just 12 Questions",
+        pitch:
+          "This isn't just another fun quiz! Get an accurate analysis of your personality and see your Egen/Teto score instantly. The hottest personality trend in Korea (2025) — find out where you belong!",
+        featuresTitle: "Features",
+        features: [
+          "Just 12 questions, done in 3 minutes",
+          "Detailed Egen/Teto score + analysis",
+          "Available in Korean & English",
+          "Easy sharing with friends",
+        ],
+        hook: "Am I more Egen or Teto? Find out now!",
+        ctaPrimary: "Start the Test",
+        ctaSecondary: "View on App Store",
+        galleryTitle: "App Preview",
+        alt1: "Gender selection screen",
+        alt2: "Question screen",
+        alt3: "Result screen",
+      },
+    }[lang];
 
   const START_TEST_HREF = "/quiz";
   const APP_STORE_HREF =
     "https://apps.apple.com/us/app/%ED%85%8C%ED%86%A0-vs-%EC%97%90%EA%B2%90/id6749515440";
 
+  // MUI theme: hard-force black bg + white text everywhere
+  const theme = createTheme({
+    palette: {
+      mode: "dark",
+      background: {
+        default: "#000000",
+        paper: "#0a0a0b",
+      },
+      text: {
+        primary: "#ffffff",
+        secondary: "#ffffff",
+      },
+      primary: {
+        main: "#ffffff", // we’ll style buttons via sx for gradients, but text remains white
+      },
+    },
+    typography: {
+      allVariants: {
+        color: "#ffffff",
+      },
+      fontFamily: `${noto.style.fontFamily}, ${inter.style.fontFamily}, system-ui, -apple-system, Segoe UI, Roboto, sans-serif`,
+    },
+    components: {
+      MuiLink: {
+        styleOverrides: {
+          root: {
+            color: "#ffffff",
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            color: "#ffffff",
+            textTransform: "none",
+            borderRadius: 16,
+            fontWeight: 700,
+          },
+        },
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            color: "#ffffff",
+          },
+        },
+      },
+    },
+  });
+
+  const panel = alpha("#ffffff", 0.06);
+  const panelStrong = alpha("#ffffff", 0.12);
+
   return (
-    <main className={`page ${inter.variable} ${noto.variable}`}>
-      {/* Top bar */}
-      <header className="nav">
-        <div className="brand">
-          <span className="dot" aria-hidden />
-          <span className="logo">{t.appname}</span>
-        </div>
-        <div className="actions">
-          <button
-            className={`lang ${lang === "ko" ? "active" : ""}`}
-            onClick={() => setLang("ko")}
-            aria-pressed={lang === "ko"}
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {/* Make sure the entire app is pitch black and text is white */}
+      <GlobalStyles
+        styles={{
+          "html, body, #__next": {
+            background: "#000000 !important",
+            color: "#ffffff !important",
+            minHeight: "100%",
+          },
+          a: { color: "#ffffff" },
+        }}
+      />
+
+      <Box
+        className={`page ${inter.variable} ${noto.variable}`}
+        sx={{
+          minHeight: "100dvh",
+          display: "flex",
+          flexDirection: "column",
+          // Subtle gradients on black (kept, but text remains white)
+          backgroundColor: "#000",
+          backgroundImage: `
+            radial-gradient(1200px 700px at 20% -10%, ${alpha("#4287f5", 0.15)}, transparent 60%),
+            radial-gradient(1200px 700px at 120% 10%, ${alpha("#ff69b4", 0.16)}, transparent 60%),
+            linear-gradient(180deg, #09090b, #0a0a0b)
+          `,
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Top bar */}
+        <AppBar
+          position="static"
+          elevation={0}
+          sx={{ background: "transparent", borderBottom: `1px solid ${panelStrong}` }}
+        >
+          <Toolbar
+            sx={{
+              px: { xs: 2, sm: 4, md: 5 },
+              py: 1.5,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
-            KO
-          </button>
-          <button
-            className={`lang ${lang === "en" ? "active" : ""}`}
-            onClick={() => setLang("en")}
-            aria-pressed={lang === "en"}
+            <Stack direction="row" spacing={1.25} alignItems="center">
+              <Box
+                aria-hidden
+                sx={{
+                  width: 10,
+                  height: 10,
+                  borderRadius: "50%",
+                  background:
+                    "linear-gradient(135deg, rgba(255,105,180,1), rgba(66,135,245,1))",
+                }}
+              />
+              <Typography variant="h6" fontWeight={700}>
+                {t.appname}
+              </Typography>
+            </Stack>
+
+            <Stack direction="row" spacing={1.25} alignItems="center">
+              <Button
+                variant="outlined"
+                aria-pressed={lang === "ko"}
+                onClick={() => setLang("ko")}
+                sx={{
+                  borderColor: panelStrong,
+                  backgroundColor: lang === "ko" ? alpha("#4287f5", 0.25) : panel,
+                  "&:hover": { borderColor: panelStrong, backgroundColor: panel },
+                  borderRadius: "999px",
+                  px: 1.5,
+                  py: 0.75,
+                }}
+              >
+                KO
+              </Button>
+              <Button
+                variant="outlined"
+                aria-pressed={lang === "en"}
+                onClick={() => setLang("en")}
+                sx={{
+                  borderColor: panelStrong,
+                  backgroundColor: lang === "en" ? alpha("#4287f5", 0.25) : panel,
+                  "&:hover": { borderColor: panelStrong, backgroundColor: panel },
+                  borderRadius: "999px",
+                  px: 1.5,
+                  py: 0.75,
+                }}
+              >
+                EN
+              </Button>
+              <Button
+                component={MUILink}
+                href={APP_STORE_HREF}
+                target="_blank"
+                rel="noreferrer"
+                variant="outlined"
+                sx={{
+                  borderColor: panelStrong,
+                  backgroundColor: panel,
+                  backdropFilter: "blur(8px)",
+                  borderRadius: "999px",
+                  px: 1.75,
+                  py: 1,
+                  textDecoration: "none",
+                }}
+              >
+                {t.ctaSecondary}
+              </Button>
+            </Stack>
+          </Toolbar>
+        </AppBar>
+
+        {/* Hero */}
+        <Container
+          maxWidth="lg"
+          sx={{
+            py: { xs: 3, sm: 6, md: 8 },
+            flexGrow: 1,
+          }}
+        >
+          <Grid
+            container
+            spacing={{ xs: 3, md: 6 }}
+            alignItems="center"
+            sx={{ mb: { xs: 6, md: 12 } }}
           >
-            EN
-          </button>
-          <a className="ghost" href={APP_STORE_HREF} target="_blank" rel="noreferrer">
-            {t.ctaSecondary}
-          </a>
-        </div>
-      </header>
+            {/* Copy */}
+            <Grid item xs={12} md={7}>
+              <Stack spacing={2}>
+                <Chip
+                  label={t.badge}
+                  variant="outlined"
+                  sx={{
+                    alignSelf: "flex-start",
+                    borderColor: panelStrong,
+                    backgroundColor: panel,
+                    color: "#ffffff",
+                    borderRadius: "999px",
+                  }}
+                />
 
-      {/* Hero */}
-      <section className="hero">
-        <div className="copy">
-          <div className="badge">{t.badge}</div>
-          <h1>
-            <span className="muted">{t.titleTop}</span>
-            <br />
-            <span className="gradient">{t.titleMain}</span>
-          </h1>
-          <p className="subtitle">{t.subtitle}</p>
-          <p className="pitch">{t.pitch}</p>
-          <div className="ctaRow">
-            <a className="primary" href={START_TEST_HREF}>
-              {t.ctaPrimary}
-            </a>
-            <a className="secondary" href={APP_STORE_HREF} target="_blank" rel="noreferrer">
-              {t.ctaSecondary}
-            </a>
-          </div>
-          <p className="hook">{t.hook}</p>
-        </div>
+                <Box component="h1" sx={{ m: 0, lineHeight: 1.05 }}>
+                  <Typography
+                    component="span"
+                    sx={{
+                      display: "block",
+                      color: alpha("#ffffff", 0.8),
+                      fontWeight: 600,
+                      letterSpacing: "-0.02em",
+                      fontSize: { xs: 28, sm: 36, md: 40 },
+                    }}
+                  >
+                    {t.titleTop}
+                  </Typography>
+                  <Typography
+                    component="span"
+                    sx={{
+                      display: "block",
+                      fontWeight: 800,
+                      letterSpacing: "-0.02em",
+                      fontSize: { xs: 40, sm: 54, md: 60 },
+                      background:
+                        "linear-gradient(90deg, rgba(66,135,245,1), rgba(255,105,180,1))",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      color: "transparent",
+                    }}
+                  >
+                    {t.titleMain}
+                  </Typography>
+                </Box>
 
-        {/* Gallery */}
-        <div className="phoneRow" aria-label={t.galleryTitle}>
-          <div className="phoneCard fan1">
-            <Image
-              src="/teto_egen/1.png"
-              alt={t.alt1}
-              width={320}
-              height={640} // adjust to your real PNG height
-              priority
-              unoptimized
-            />
-          </div>
-          <div className="phoneCard fan2">
-            <Image
-              src="/teto_egen/2.png"
-              alt={t.alt2}
-              width={320}
-              height={640}
-              priority
-              unoptimized
-            />
-          </div>
-          <div className="phoneCard fan3">
-            <Image
-              src="/teto_egen/3.png"
-              alt={t.alt3}
-              width={320}
-              height={640}
-              priority
-              unoptimized
-            />
-          </div>
-        </div>
-      </section>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ color: alpha("#ffffff", 0.9), fontWeight: 600 }}
+                >
+                  {t.subtitle}
+                </Typography>
 
-      {/* Features */}
-      <section className="features">
-        <h2>{t.featuresTitle}</h2>
-        <ul className="grid">
-          {t.features.map((f, i) => (
-            <li key={i} className="card">
-              <div className="icon" aria-hidden>
-                ★
-              </div>
-              <p>{f}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+                <Typography sx={{ color: alpha("#ffffff", 0.9), maxWidth: 56 * 8 }}>
+                  {t.pitch}
+                </Typography>
 
-      {/* Footer */}
-      <footer className="footer">
-        <p>© {new Date().getFullYear()} 테토 vs 에겐</p>
-        <div className="links">
-          <a href={APP_STORE_HREF} target="_blank" rel="noreferrer">
-            App Store
-          </a>
-        </div>
-      </footer>
+                <Stack direction="row" spacing={1.5} flexWrap="wrap">
+                  <Button
+                    component={MUILink}
+                    href={APP_STORE_HREF}
+                    target="_blank"
+                    rel="noreferrer"
+                    variant="outlined"
+                    sx={{
+                      px: 2.25,
+                      py: 1.25,
+                      borderRadius: 2,
+                      textDecoration: "none",
+                      boxShadow: "0 10px 30px rgba(0,0,0,0.45)",
+                      background:
+                        "linear-gradient(135deg, rgba(66,135,245,1), rgba(255,105,180,1))",
+                      "&:hover": {
+                        transform: "translateY(-1px)",
+                        background:
+                          "linear-gradient(135deg, rgba(66,135,245,0.95), rgba(255,105,180,0.95))",
+                      },
+                      transition: "transform 160ms ease, background 160ms ease",
+                    }}
+                  >
+                    {t.ctaSecondary}
+                  </Button>
+                </Stack>
 
-      <style jsx>{`
-        :root {
-          --bg: #0a0a0b;
-          --panel: rgba(255, 255, 255, 0.06);
-          --panel-strong: rgba(255, 255, 255, 0.12);
-          --text: #e7e7ea;
-          --muted: #a3a3ad;
-          --accent: 255, 105, 180;
-          --accent2: 66, 135, 245;
-          --radius-lg: 16px;
-          --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-        }
-        * {
-          box-sizing: border-box;
-        }
-        .page {
-          min-height: 100dvh;
-          background: radial-gradient(
-              1200px 700px at 20% -10%,
-              rgba(var(--accent2), 0.15),
-              transparent 60%
-            ),
-            radial-gradient(
-              1200px 700px at 120% 10%,
-              rgba(var(--accent), 0.16),
-              transparent 60%
-            ),
-            linear-gradient(180deg, #09090b, #0a0a0b);
-          color: var(--text);
-          display: flex;
-          flex-direction: column;
-          font-family: var(--font-noto), var(--font-inter), system-ui,
-            -apple-system, Segoe UI, Roboto, sans-serif;
-        }
-        .nav {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 20px clamp(16px, 4vw, 40px);
-        }
-        .brand {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          font-weight: 700;
-        }
-        .dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: linear-gradient(
-            135deg,
-            rgba(var(--accent), 1),
-            rgba(var(--accent2), 1)
-          );
-        }
-        .logo {
-          letter-spacing: 0.4px;
-        }
-        .actions {
-          display: flex;
-          gap: 10px;
-          align-items: center;
-        }
-        .lang {
-          background: var(--panel);
-          color: var(--text);
-          border: 1px solid var(--panel-strong);
-          padding: 8px 12px;
-          border-radius: 999px;
-          cursor: pointer;
-          transition: 180ms ease;
-        }
-        .lang.active {
-          background: rgba(var(--accent2), 0.25);
-          border-color: rgba(var(--accent2), 0.4);
-        }
-        .ghost {
-          padding: 9px 14px;
-          border-radius: 999px;
-          border: 1px solid var(--panel-strong);
-          color: var(--text);
-          text-decoration: none;
-          backdrop-filter: blur(8px);
-          background: var(--panel);
-        }
-        .hero {
-          display: grid;
-          grid-template-columns: 1.15fr 1fr;
-          gap: clamp(20px, 4vw, 56px);
-          padding: clamp(24px, 5vw, 72px) clamp(16px, 5vw, 60px);
-          align-items: center;
-        }
-        @media (max-width: 980px) {
-          .hero {
-            grid-template-columns: 1fr;
-          }
-        }
-        .copy .badge {
-          display: inline-block;
-          padding: 6px 12px;
-          border: 1px solid var(--panel-strong);
-          border-radius: 999px;
-          font-size: 12px;
-          background: var(--panel);
-          margin-bottom: 14px;
-        }
-        h1 {
-          font-size: clamp(34px, 6vw, 60px);
-          line-height: 1.05;
-          margin: 0 0 12px;
-          letter-spacing: -0.02em;
-        }
-        .muted {
-          color: var(--muted);
-          font-weight: 600;
-        }
-        .gradient {
-          background: linear-gradient(
-            90deg,
-            rgba(var(--accent2), 1),
-            rgba(var(--accent), 1)
-          );
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-        }
-        .subtitle {
-          color: #cfcfd6;
-          margin: 0 0 6px;
-          font-weight: 600;
-        }
-        .pitch {
-          color: #b8b8c2;
-          margin: 8px 0 22px;
-          max-width: 56ch;
-        }
-        .ctaRow {
-          display: flex;
-          gap: 12px;
-          flex-wrap: wrap;
-          margin: 16px 0 6px;
-        }
-        .primary,
-        .secondary {
-          text-decoration: none;
-          font-weight: 700;
-          border-radius: 16px;
-          padding: 12px 18px;
-          display: inline-flex;
-          align-items: center;
-          border: 1px solid transparent;
-          transition: transform 160ms ease, background 160ms ease;
-        }
-        .primary {
-          background: linear-gradient(
-            135deg,
-            rgba(var(--accent2), 1),
-            rgba(var(--accent), 1)
-          );
-          color: #0a0a0b;
-          box-shadow: var(--shadow);
-        }
-        .primary:hover {
-          transform: translateY(-1px);
-        }
-        .secondary {
-          background: var(--panel);
-          color: var(--text);
-          border-color: var(--panel-strong);
-          backdrop-filter: blur(6px);
-        }
-        .hook {
-          color: #d7d7df;
-          margin-top: 14px;
-          font-style: italic;
-        }
-        /* Phone gallery */
-        .phoneRow {
-          display: flex;
-          gap: 16px;
-          overflow-x: auto;
-          padding: 6px 6px 6px 0;
-          scroll-snap-type: x mandatory;
-          -webkit-overflow-scrolling: touch;
-        }
-        .phoneCard {
-          flex: 0 0 auto;
-          width: clamp(240px, 32vw, 320px);
-          border-radius: 28px;
-          overflow: hidden;
-          border: 1px solid var(--panel-strong);
-          background: #0f1114;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55),
-            inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-        }
-        .phoneCard :global(img) {
-          width: 100%;
-          height: auto;
-          object-fit: contain;
-          display: block;
-        }
-        /* Desktop fan effect */
-        @media (min-width: 981px) {
-          .phoneRow {
-            overflow: visible;
-            justify-content: center;
-            gap: 0;
-          }
-          .phoneCard {
-            margin: 0 -40px;
-          }
-          .fan1 {
-            transform: rotate(-8deg) translateY(14px);
-            opacity: 0.9;
-          }
-          .fan2 {
-            transform: rotate(0deg) translateY(-6px);
-            z-index: 2;
-          }
-          .fan3 {
-            transform: rotate(8deg) translateY(14px);
-            opacity: 0.95;
-          }
-        }
-        .features {
-          padding: 20px clamp(16px, 5vw, 60px) 80px;
-        }
-        .features h2 {
-          font-size: clamp(22px, 3.5vw, 30px);
-          margin: 0 0 16px;
-        }
-        .grid {
-          display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 14px;
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-        @media (max-width: 980px) {
-          .grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        .card {
-          background: linear-gradient(180deg, var(--panel), rgba(255, 255, 255, 0.03));
-          border: 1px solid var(--panel-strong);
-          border-radius: var(--radius-lg);
-          padding: 16px 16px 18px;
-          min-height: 96px;
-          display: grid;
-          grid-template-columns: 36px 1fr;
-          gap: 12px;
-          align-items: start;
-          box-shadow: var(--shadow);
-        }
-        .icon {
-          width: 36px;
-          height: 36px;
-          border-radius: 12px;
-          display: grid;
-          place-items: center;
-          background: radial-gradient(
-            circle at 30% 30%,
-            rgba(var(--accent2), 0.8),
-            rgba(var(--accent), 0.8)
-          );
-          color: #0a0a0b;
-          font-weight: 900;
-        }
-        .card p {
-          margin: 4px 0 0;
-          color: #d6d6de;
-        }
-        .footer {
-          border-top: 1px solid var(--panel-strong);
-          padding: 18px clamp(16px, 5vw, 60px);
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          color: var(--muted);
-          background: rgba(255, 255, 255, 0.02);
-        }
-        .links {
-          display: flex;
-          gap: 16px;
-        }
-        .links a {
-          color: #e7e7ea;
-          text-decoration: none;
-        }
-        .links a:hover {
-          text-decoration: underline;
-        }
-      `}</style>
-    </main>
+                <Typography sx={{ color: alpha("#ffffff", 0.9), fontStyle: "italic" }}>
+                  {t.hook}
+                </Typography>
+              </Stack>
+            </Grid>
+
+            {/* Gallery */}
+            <Grid item xs={12} md={5}>
+              <Box aria-label={t.galleryTitle}>
+                <Box
+                  sx={{
+                    display: { xs: "flex", md: "none" },
+                    gap: 2,
+                    overflowX: "auto",
+                    pb: 1,
+                    scrollSnapType: "x mandatory",
+                    WebkitOverflowScrolling: "touch",
+                  }}
+                >
+                  {[1, 2, 3].map((n, idx) => (
+                    <Box
+                      key={idx}
+                      sx={{
+                        flex: "0 0 auto",
+                        width: { xs: 240, sm: 280, md: 320 },
+                        borderRadius: 3.5,
+                        overflow: "hidden",
+                        border: `1px solid ${panelStrong}`,
+                        background: "#0f1114",
+                        boxShadow:
+                          "0 20px 60px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.02)",
+                      }}
+                    >
+                      <Image
+                        src={`/teto_egen/${n}.png`}
+                        alt={t[`alt${n}`]}
+                        width={320}
+                        height={640}
+                        priority
+                        unoptimized
+                        style={{ width: "100%", height: "auto", display: "block" }}
+                      />
+                    </Box>
+                  ))}
+                </Box>
+
+                {/* Desktop fan effect */}
+                <Box
+                  sx={{
+                    display: { xs: "none", md: "flex" },
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                    position: "relative",
+                    height: 480,
+                  }}
+                >
+                  {/* Left */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      left: "50%",
+                      transform: "translateX(-130%) rotate(-8deg) translateY(14px)",
+                      width: 320,
+                      borderRadius: 3.5,
+                      overflow: "hidden",
+                      border: `1px solid ${panelStrong}`,
+                      background: "#0f1114",
+                      opacity: 0.9,
+                      boxShadow:
+                        "0 20px 60px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.02)",
+                    }}
+                  >
+                    <Image
+                      src="/teto_egen/1.png"
+                      alt={t.alt1}
+                      width={320}
+                      height={640}
+                      priority
+                      unoptimized
+                      style={{ width: "100%", height: "auto", display: "block" }}
+                    />
+                  </Box>
+
+                  {/* Center */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      left: "50%",
+                      transform: "translateX(-50%) translateY(-6px)",
+                      width: 320,
+                      borderRadius: 3.5,
+                      overflow: "hidden",
+                      border: `1px solid ${panelStrong}`,
+                      background: "#0f1114",
+                      zIndex: 2,
+                      boxShadow:
+                        "0 20px 60px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.02)",
+                    }}
+                  >
+                    <Image
+                      src="/teto_egen/2.png"
+                      alt={t.alt2}
+                      width={320}
+                      height={640}
+                      priority
+                      unoptimized
+                      style={{ width: "100%", height: "auto", display: "block" }}
+                    />
+                  </Box>
+
+                  {/* Right */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      left: "50%",
+                      transform: "translateX(30%) rotate(8deg) translateY(14px)",
+                      width: 320,
+                      borderRadius: 3.5,
+                      overflow: "hidden",
+                      border: `1px solid ${panelStrong}`,
+                      background: "#0f1114",
+                      opacity: 0.95,
+                      boxShadow:
+                        "0 20px 60px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.02)",
+                    }}
+                  >
+                    <Image
+                      src="/teto_egen/3.png"
+                      alt={t.alt3}
+                      width={320}
+                      height={640}
+                      priority
+                      unoptimized
+                      style={{ width: "100%", height: "auto", display: "block" }}
+                    />
+                  </Box>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+
+          {/* Features */}
+          <Box component="section" sx={{ py: { xs: 4, md: 20 } }}>
+            <Typography variant="h5" sx={{ mb: 2 }}>
+              {t.featuresTitle}
+            </Typography>
+            <Grid container spacing={{ xs: 2, md: 3 }}>
+              {t.features.map((f, i) => (
+                <Grid item xs={12} sm={6} md={3} key={i}>
+                  <Card
+                    variant="outlined"
+                    sx={{
+                      height: "100%",
+                      borderColor: panelStrong,
+                      background: `linear-gradient(180deg, ${panel}, ${alpha(
+                        "#ffffff",
+                        0.03
+                      )})`,
+                      boxShadow: "0 10px 30px rgba(0,0,0,0.45)",
+                    }}
+                  >
+                    <CardContent
+                      sx={{
+                        display: "grid",
+                        gridTemplateColumns: "36px 1fr",
+                        gap: 1.5,
+                        alignItems: "start",
+                        py: 2.25,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: 36,
+                          height: 36,
+                          borderRadius: 1.5,
+                          display: "grid",
+                          placeItems: "center",
+                          background:
+                            "radial-gradient(circle at 30% 30%, rgba(66,135,245,.8), rgba(255,105,180,.8))",
+                          color: "#0a0a0b",
+                          fontWeight: 900,
+                        }}
+                        aria-hidden
+                      >
+                        <StarIcon />
+                      </Box>
+                      <Typography sx={{ mt: 0.5 }}>{f}</Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Container>
+
+        {/* Footer */}
+        <Box
+          component="footer"
+          sx={{
+            borderTop: `1px solid ${panelStrong}`,
+            py: 2,
+            px: { xs: 2, sm: 4, md: 5 },
+            background: alpha("#ffffff", 0.02),
+          }}
+        >
+
+          <Typography>
+            © {new Date().getFullYear()} {t.appname}
+          </Typography>
+
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
